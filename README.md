@@ -11,6 +11,18 @@
 2022.01 ~ 2022. 
 
 ### Stacks
+| category | stack |
+|---|:---:|
+| `Languate` | Java11 |
+| `Framework` | SpringBoot 2.6.2 |
+| `DB` | AWS RDS, MariaDB, JPA, QueryDSL, inMemory/Test: H2|
+| `Test` | JUnit5 |  
+| `CI/CD` | GithubAction, Docker |
+| `AWS`| EC2, S3 |
+| `Auth`| JWT | 
+
+
+### Developers
 
 | 직군 | 이름 |
 |---|:---:|
