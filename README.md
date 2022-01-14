@@ -4,6 +4,7 @@
 
 > 익명의 사이드 프로젝트&nbsp;&nbsp;Anonymous🎭
 
+![ERD](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGT__PbylyF-wZjJh_61kLKx0UH8l8J80uxg&usqp=CAU "ERD")
 
 ### Period
 
