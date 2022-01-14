@@ -1,6 +1,6 @@
-name: Greetings
+name: Contiribution Thanks
 
-on: [issues]
+on: [issues, pull_request]
 
 jobs:
   issueWelcomeBOT:
@@ -12,5 +12,5 @@ jobs:
             github.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '👋 Thanks for Issue!'
+              body: '👋 Thanks for Contribution!'
             })
