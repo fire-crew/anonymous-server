@@ -2,7 +2,7 @@
 
 ![issue](https://img.shields.io/badge/issue-open-green) ![문의사항](https://img.shields.io/badge/%EB%AC%B8%EC%9D%98%ED%95%98%EA%B8%B0-pooreumsunny%40gamil.com-green)
 
-> 익명의 사이드 프로젝트&nbsp;&nbsp;Anonymous🎭
+> 안냥 익명의 사이드 프로젝트&nbsp;&nbsp;Anonymous🎭
 
 ![ERD](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGT__PbylyF-wZjJh_61kLKx0UH8l8J80uxg&usqp=CAU "ERD")
 
