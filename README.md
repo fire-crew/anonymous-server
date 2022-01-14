@@ -14,7 +14,18 @@
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 
-## Architecture
+### Period
+
+2022.01 ~ 2022. 
+
+### Stacks
+
+| 직군 | 이름 |
+|---|:---:|
+| `Web Developer` | 최푸름 |
+| `Server Developer` | 김민철 |
+| `Server Developer` | 강정호 |
+| `Server Developer` | 조지원 |  
 
 
 ## Issues? ##
