@@ -18,7 +18,7 @@
 
 
 ## Issues? ##
-If you find any issue, please raise an issue on the [Issue]() page.
+If you find any issue, please raise an issue on the [Issue]( ) page.
 
 ## License
 - Code: [MIT](./LICENSE) © [PuReum Choi](https://blue-boy.tistory.com/) & [Mincheol Kim]() & [Won George]() & [Jungho kang]()
