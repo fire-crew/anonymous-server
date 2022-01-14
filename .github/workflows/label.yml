@@ -9,26 +9,14 @@ name: Labeler
 on: [pull_request]
 
 jobs:
-  issueWelcomeBOT:
+  welcomeBot:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v4
         with:
           script: |
             github.issues.createComment({
-              issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: '👋 Thanks for PR! \n ** build & test 실패시 review  불가합니다.**'
             })
-  label:
-
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-
-    steps:
-    - uses: actions/labeler@v2
-      with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
