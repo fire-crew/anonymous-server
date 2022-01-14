@@ -1,6 +1,6 @@
 name: Contiribution Thanks
 
-on: [issues, pull_request]
+on: [issues]
 
 jobs:
   issueWelcomeBOT:
