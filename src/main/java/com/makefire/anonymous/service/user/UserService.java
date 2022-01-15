@@ -1,15 +1,18 @@
-package com.makefire.anonymous.config.web.resolver;
+package com.makefire.anonymous.service.user;
+
+import org.springframework.stereotype.Service;
 
 /**
  *packageName : com.makefire.anonymous
- * fileName : AuthenticationTokenResolver
+ * fileName : UserService
  * author : 최푸름
  * date : 22-01-14
- * description : 인증토큰 리조버
+ * description : User 비즈니스로직
  * =================================
  * DATE     AUTHOR   NOTE
  * 22-01-15 최푸름
  * ---------------------------------
  */
-public class AuthenticationTokenResolver {
+@Service
+public class UserService {
 }

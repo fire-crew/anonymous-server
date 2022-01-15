@@ -1,15 +1,18 @@
-package com.makefire.anonymous.config.web.resolver;
+package com.makefire.anonymous.rest.controller.api;
+
+import org.springframework.stereotype.Controller;
 
 /**
  *packageName : com.makefire.anonymous
- * fileName : AuthenticationTokenResolver
+ * fileName : UserController
  * author : 최푸름
  * date : 22-01-14
- * description : 인증토큰 리조버
+ * description : 유저 E2E
  * =================================
  * DATE     AUTHOR   NOTE
  * 22-01-15 최푸름
  * ---------------------------------
  */
-public class AuthenticationTokenResolver {
+@Controller
+public class UserController {
 }

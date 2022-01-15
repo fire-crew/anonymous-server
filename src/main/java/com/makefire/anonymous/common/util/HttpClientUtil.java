@@ -1,15 +1,15 @@
-package com.makefire.anonymous.config.web.resolver;
+package com.makefire.anonymous.common.util;
 
 /**
  *packageName : com.makefire.anonymous
- * fileName : AuthenticationTokenResolver
+ * fileName : HttpClientUtil
  * author : 최푸름
  * date : 22-01-14
- * description : 인증토큰 리조버
+ * description : HttpClient
  * =================================
  * DATE     AUTHOR   NOTE
  * 22-01-15 최푸름
  * ---------------------------------
  */
-public class AuthenticationTokenResolver {
+public class HttpClientUtil {
 }

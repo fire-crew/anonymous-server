@@ -1,15 +1,16 @@
-package com.makefire.anonymous.config.web.resolver;
+package com.makefire.anonymous.exception;
 
 /**
  *packageName : com.makefire.anonymous
- * fileName : AuthenticationTokenResolver
+ * fileName : UserRepository
  * author : 최푸름
  * date : 22-01-14
- * description : 인증토큰 리조버
+ * description : 유저 기본 레포지토리
  * =================================
  * DATE     AUTHOR   NOTE
  * 22-01-15 최푸름
  * ---------------------------------
  */
-public class AuthenticationTokenResolver {
+enum ErrorCode {
+
 }
