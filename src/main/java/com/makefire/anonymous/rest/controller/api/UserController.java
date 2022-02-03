@@ -1,6 +1,8 @@
 package com.makefire.anonymous.rest.controller.api;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  *packageName : com.makefire.anonymous
@@ -15,4 +17,11 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class UserController {
+
+
+    @RequestMapping(method = RequestMethod.GET, path = "/getMethod") //localhost:8080/api/getMethod
+    public String getRequest(){
+        return "Hi getMethod";
+
+    }
 }
