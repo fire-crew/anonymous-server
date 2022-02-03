@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * ---------------------------------
  */
 @Controller
-publicclassUserController{
+public class UserController{
 
 
-@RequestMapping(method=RequestMethod.GET,path="/getMethod")//localhost:8080/api/getMethod
-publicStringgetRequest(){
+@RequestMapping(method=RequestMethod.GET,path="/getMethod")
+//localhost:8080/api/getMethod
+public String getRequest(){
         return"HigetMethod";
 
         }
