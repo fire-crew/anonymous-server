@@ -3,6 +3,7 @@ package com.makefire.anonymous.rest.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,8 +29,9 @@ public class HealthController {
             @ApiResponse(responseCode = "404", description = "NOT FOUND !!"),
             @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR !!")
     })
-    @GetMapping("/healthCheck")
-    public String healthCheck(){
-        return "health Checking...";
+    @GetMapping("/v1//healthCheck")
+    public ResponseEntity<Void> health(){
+        return ResponseEntity.ok()
+                .build();
     }
 }
