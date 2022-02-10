@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface BoardRepository  {
+public interface BoardRepository extends JpaRepository<Board, Long>  {
 
 //    @Query(value = "select boardName,postingTime from sample_board where boardName = :name", nativeQuery=true)
 //    List<Board> searchParamRepo(@Param("boardName") String boardName);
@@ -19,5 +19,6 @@ public interface BoardRepository  {
     Optional<Board> findById(Long id);
     Optional<Board> findByBoardName(String boardName);
     List<Board> findAll();
+
 
 }
