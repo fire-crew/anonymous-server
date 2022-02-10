@@ -29,7 +29,7 @@ public class HealthController {
             @ApiResponse(responseCode = "404", description = "NOT FOUND !!"),
             @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR !!")
     })
-    @GetMapping("/v1//healthCheck")
+    @GetMapping("/v1/healthCheck")
     public ResponseEntity<Void> health(){
         return ResponseEntity.ok()
                 .build();
