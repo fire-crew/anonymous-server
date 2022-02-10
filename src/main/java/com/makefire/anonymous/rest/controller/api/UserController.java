@@ -21,7 +21,7 @@ public class UserController{
 @RequestMapping(method=RequestMethod.GET,path="/getMethod")
 //localhost:8080/api/getMethod
 public String getRequest(){
-        return"HigetMethod";
+        return  "skxokj.rolls";
 
         }
         }
