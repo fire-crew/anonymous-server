@@ -1,36 +1,59 @@
 spring:
-  h2:
-    console:
-      enabled: true  # H2 웹 콘솔을 사용하겠다는 의미
-      path: /test_db  # 콘솔의 경로
-
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-
-  datasource:
-    driver-class-name: org.h2.Driver  #h2 드라이버 설정
-    url: jdbc:h2:file:~/sideProject/test_db;AUTO_SERVER=TRUE  #접속 URL
-    username: test  # 사용자 이름 (로그인 시 사용)
-    password: 1234  # 사용자 암호 (로그인 시 사용)
-    # jpa 설정
-    jpa:
+  profiles:
+    include: oauth
+  jpa:
+    show_sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
       hibernate:
-        ddl-auto: create
-      properties:
-        hibernate:
-          format_sql: true
+        dialect: org.hibernate.dialect.MySQL5Dialect
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:mem:testdb;MODE=MYSQL
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+      path: /h2-console
 
-      # devtools 설정
-    devtools:
-      livereload:
-        enabled: true
-    freemarker:
-      cache: false
-
-
-  logging.level:
-    org.hibernate.SQL: debug
+#spring:
+#  h2:
+#    console:
+#      enabled: true  # H2 웹 콘솔을 사용하겠다는 의미
+#      path: /test_db  # 콘솔의 경로
+#
+#  mvc:
+#    pathmatch:
+#      matching-strategy: ant_path_matcher
+#
+#  datasource:
+#    driver-class-name: org.h2.Driver  #h2 드라이버 설정
+#    url: jdbc:h2:file:~/sideProject/test_db;AUTO_SERVER=TRUE  #접속 URL
+#    username: test  # 사용자 이름 (로그인 시 사용)
+#    password: 1234  # 사용자 암호 (로그인 시 사용)
+#    # jpa 설정
+#    jpa:
+#      hibernate:
+#        ddl-auto: create
+#      properties:
+#        hibernate:
+#          format_sql: true
+#
+#      # devtools 설정
+#    devtools:
+#      livereload:
+#        enabled: true
+#    freemarker:
+#      cache: false
+#
+#
+#  logging.level:
+#    org.hibernate.SQL: debug
 #  profiles:
 #    include: oauth
 #  jpa:

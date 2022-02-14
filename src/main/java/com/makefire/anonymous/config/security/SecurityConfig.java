@@ -1,5 +1,12 @@
 package com.makefire.anonymous.config.security;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
 /**
  *packageName : com.makefire.anonymous
  * fileName : SecurityConfig
@@ -11,5 +18,16 @@ package com.makefire.anonymous.config.security;
  * 22-01-15 최푸름
  * ---------------------------------
  */
-public class SecurityConfig {
+@RequiredArgsConstructor
+@EnableWebSecurity
+@Configuration
+@EnableGlobalMethodSecurity(
+        securedEnabled = true
+)
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring()
+                .antMatchers("/**","/v1/**", "/configuration/**", "/swagger-ui/**", "/webjars/**", "/h2-console/**");
+    }
 }

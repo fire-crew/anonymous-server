@@ -1,5 +1,7 @@
 package com.makefire.anonymous.service.user;
 
+import com.makefire.anonymous.domain.user.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,5 +16,8 @@ import org.springframework.stereotype.Service;
  * ---------------------------------
  */
 @Service
+@AllArgsConstructor
 public class UserService {
+    private final UserRepository userRepository;
+
 }

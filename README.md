@@ -25,7 +25,7 @@
 ### Developers
 
 | 직군 | 이름 |
-|---|:---:|
+|---|:--:|
 | `Web Developer` | 최푸름 |
 | `Server Developer` | 김민철 |
 | `Server Developer` | 강정호 |
