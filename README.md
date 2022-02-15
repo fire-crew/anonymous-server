@@ -8,7 +8,7 @@
 
 ### Period
 
-2022.01.15 ~ 2022. 
+2022.01.14 ~ 2022. 
 
 ### Stacks
 | category | stack |
