@@ -2,16 +2,22 @@ package com.makefire.anonymous.rest.controller.api;
 
 import com.makefire.anonymous.domain.board.entity.Board;
 import com.makefire.anonymous.domain.board.repository.BoardRepository;
+import com.makefire.anonymous.rest.dto.response.Message;
+import com.makefire.anonymous.rest.dto.response.Response;
+import com.makefire.anonymous.rest.dto.response.StatusEnum;
 import com.makefire.anonymous.service.board.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.Charset;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/test")
+@RequestMapping("/board")
 public class BoardController {
 
     private final BoardService boardService;
@@ -40,11 +46,24 @@ public class BoardController {
     }
 
 
+//    @GetMapping("/{id}")
+//    public Board getBoard(@PathVariable Long id) {
+//        return boardService.getBoard(id);
+//    }
+
     @GetMapping("/{id}")
     public Board getBoard(@PathVariable Long id) {
-        return boardService.getBoard(id);
-    }
+        Board board = boardService.getBoard(id);
+        Message message = new Message();
+        HttpHeaders headers= new HttpHeaders();
+        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
+        message.setStatus(StatusEnum.OK);
+        message.setMessage("성공 코드");
+        message.setData(board);
+
+        return new Response<>(message, headers, HttpStatus.OK);
+    }
 
 
 

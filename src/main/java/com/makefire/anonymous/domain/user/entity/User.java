@@ -22,9 +22,9 @@ import javax.persistence.Id;
 public class User {
     @Id
     @GeneratedValue
-    Long id;
-    String name;
-    String address;
+    private Long id;
+    private String name;
+    private String address;
 
 
 
