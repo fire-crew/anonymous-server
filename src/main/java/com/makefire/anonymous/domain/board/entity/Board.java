@@ -1,19 +1,14 @@
 package com.makefire.anonymous.domain.board.entity;
-import lombok.*;
 
-import javax.persistence.Column;
+import com.makefire.anonymous.common.extensions.Common;
+import lombok.Data;
+
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 
 
 @Data
 @Entity
-public class Board {
-    @Id
-    @GeneratedValue
-    private Long id;
+public class Board extends Common {
 
 
     private String boardName;
