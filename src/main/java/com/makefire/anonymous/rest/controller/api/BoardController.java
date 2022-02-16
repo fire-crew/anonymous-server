@@ -1,7 +1,6 @@
 package com.makefire.anonymous.rest.controller.api;
 
 import com.makefire.anonymous.domain.board.entity.Board;
-import com.makefire.anonymous.domain.board.repository.BoardRepository;
 import com.makefire.anonymous.rest.dto.response.Message;
 import com.makefire.anonymous.rest.dto.response.Response;
 import com.makefire.anonymous.rest.dto.response.StatusEnum;
@@ -28,11 +27,6 @@ public class BoardController {
         return boardService.selectBoards();
     }
 
-//    @GetMapping("find")
-//    public String searchByBoardName(@RequestParam(value = "name") String boardName) {
-//        return boardRepository.findByBoardName(boardName).toString();
-//    }
-
 
     @PostMapping
     public Board saveBoard(@RequestBody Board board) {
@@ -46,16 +40,11 @@ public class BoardController {
     }
 
 
-//    @GetMapping("/{id}")
-//    public Board getBoard(@PathVariable Long id) {
-//        return boardService.getBoard(id);
-//    }
-
     @GetMapping("/{id}")
     public Response<Message> getBoard(@PathVariable Long id) {
         Board board = boardService.getBoard(id);
         Message message = new Message();
-        HttpHeaders headers= new HttpHeaders();
+        HttpHeaders headers = new HttpHeaders();
         headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
         message.setStatus(StatusEnum.OK);
@@ -65,12 +54,8 @@ public class BoardController {
         return new Response<>(message, headers, HttpStatus.OK);
     }
 
-
-
-
-
-//    @GetMapping("searchParamRepo")
-//    public String searchParamRepoMember(@RequestParam(value = "name") String boardName) {
-//        return boardRepository.searchParamRepo(boardName).toString();
-//    }
 }
+
+
+
+
