@@ -7,8 +7,8 @@
 ![ERD](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGT__PbylyF-wZjJh_61kLKx0UH8l8J80uxg&usqp=CAU "ERD")
 
 ### Period
+2022.01.14 ~ 2022. 
 
-2022.01 ~ 2022.8 
 
 ### Stacks
 | category | stack |
