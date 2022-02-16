@@ -52,7 +52,7 @@ public class BoardController {
 //    }
 
     @GetMapping("/{id}")
-    public Board getBoard(@PathVariable Long id) {
+    public Response<Message> getBoard(@PathVariable Long id) {
         Board board = boardService.getBoard(id);
         Message message = new Message();
         HttpHeaders headers= new HttpHeaders();
