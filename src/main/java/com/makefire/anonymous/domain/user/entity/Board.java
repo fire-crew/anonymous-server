@@ -1,9 +1,10 @@
 package com.makefire.anonymous.domain.user.entity;
 
+import lombok.*;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 
 /**
  * packageName : com.makefire.anonymous
@@ -16,10 +17,24 @@ import javax.validation.constraints.NotNull;
  * 22-02-22 강정호
  * ---------------------------------
  */
+@Getter
 @Entity
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@Builder
 public class Board {
+
     @Id
     @GeneratedValue
     private long id;
 
+    private String title; /* 글 제목 */
+
+    private String contents; /* 글 내용 */
+
+    private String author; /* 글 작성자 */
+
+    private String create_date; /* 최초 작성일 */
+
+    private String modified_date; /* 마지막 수정일 */
 }
