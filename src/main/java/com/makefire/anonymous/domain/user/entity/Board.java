@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 /**
  * packageName : com.makefire.anonymous
@@ -28,10 +29,12 @@ public class Board {
     @GeneratedValue
     private long id;
 
+    @NotNull
     private String title; /* 글 제목 */
 
     private String contents; /* 글 내용 */
 
+    @NotNull
     private String author; /* 글 작성자 */
 
     private String create_date; /* 최초 작성일 */
