@@ -42,18 +42,4 @@ public class CachingConfig {
             cm.createCache(DB_CACHE, jcacheConfiguration);
         };
     }
-    /*
-    @Bean
-    public JCacheManagerCustomizer cacheManagerCustomizer() {
-        return cm -> {
-            cm.createCache(DB_CACHE, jcacheConfiguration);
-            cm.createCache({cache name}, Eh107Configuration.fromEhcacheCacheConfiguration(CacheConfigurationBuilder.newCacheConfigurationBuilder(Long.class, {dto}.class,
-                            ResourcePoolsBuilder.newResourcePoolsBuilder()
-                                    .heap(10000, EntryUnit.ENTRIES))
-                    .withSizeOfMaxObjectSize(1000, MemoryUnit.B)
-                    .withExpiry(ExpiryPolicyBuilder.timeToIdleExpiration(Duration.ofSeconds(10)))
-                    .withExpiry(ExpiryPolicyBuilder.timeToLiveExpiration(Duration.ofSeconds(20)))));
-        };
-    }
-    */
 }
