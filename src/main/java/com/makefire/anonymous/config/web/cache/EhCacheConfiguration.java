@@ -17,12 +17,12 @@ import java.time.Duration;
 
 @EnableCaching
 @Configuration
-public class CachingConfig {
+public class EhCacheConfiguration {
     public static final String DB_CACHE = "db_cache";
 
     private final javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration;
 
-    public CachingConfig() {
+    public EhCacheConfiguration() {
         this.jcacheConfiguration = Eh107Configuration.fromEhcacheCacheConfiguration(CacheConfigurationBuilder.newCacheConfigurationBuilder(Object.class, Object.class,
                         ResourcePoolsBuilder.newResourcePoolsBuilder()
                                 .heap(10000, EntryUnit.ENTRIES))
