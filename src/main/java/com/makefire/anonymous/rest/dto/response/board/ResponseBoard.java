@@ -1,13 +1,13 @@
-package com.makefire.anonymous.rest.dto.response;
+package com.makefire.anonymous.rest.dto.response.board;
 
-import com.makefire.anonymous.domain.user.entity.Board;
+import com.makefire.anonymous.domain.board.entity.Board;
 import lombok.*;
 
 @NoArgsConstructor( access = AccessLevel.PRIVATE)
 @AllArgsConstructor( access = AccessLevel.PRIVATE)
 @Getter
 @Builder
-public class ResponseBoardDto {
+public class ResponseBoard {
 
     private long id; /* 글 ID */
 
@@ -21,10 +21,10 @@ public class ResponseBoardDto {
 
     private String modifiedDate; /* 마지막 수정일 */
 
-    public static ResponseBoardDto from(Board board) {
+    public static ResponseBoard from(Board board) {
         if(board == null) return null;
 
-        return ResponseBoardDto.builder()
+        return ResponseBoard.builder()
                 .id(board.getId())
                 .title(board.getTitle())
                 .contents(board.getContents())

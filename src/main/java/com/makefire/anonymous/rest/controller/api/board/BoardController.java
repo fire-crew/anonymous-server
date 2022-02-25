@@ -1,6 +1,6 @@
-package com.makefire.anonymous.rest.controller.api;
+package com.makefire.anonymous.rest.controller.api.board;
 
-import com.makefire.anonymous.rest.dto.response.ResponseBoardDto;
+import com.makefire.anonymous.rest.dto.response.board.ResponseBoard;
 import com.makefire.anonymous.service.board.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +28,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseBoardDto> selectBoard(@PathVariable("id") Long boardId) {
+    public ResponseEntity<ResponseBoard> selectBoard(@PathVariable("id") Long boardId) {
 
         return ResponseEntity.ok(boardService.selectBoard(boardId));
     }

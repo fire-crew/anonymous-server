@@ -1,4 +1,4 @@
-package com.makefire.anonymous.rest.dto.request;
+package com.makefire.anonymous.rest.dto.request.board;
 
 
 import lombok.*;
@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @Builder
-public class RequestBoardDto {
+public class RequestBoard {
 
     private Long id; /* 글 ID */
 

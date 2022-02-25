@@ -1,4 +1,4 @@
-package com.makefire.anonymous.domain.user.entity;
+package com.makefire.anonymous.domain.board.entity;
 
 import lombok.*;
 

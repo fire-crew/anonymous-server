@@ -1,9 +1,9 @@
 package com.makefire.anonymous.service.board;
 
-import com.makefire.anonymous.domain.user.entity.Board;
-import com.makefire.anonymous.domain.user.repository.BoardRepository;
+import com.makefire.anonymous.domain.board.entity.Board;
+import com.makefire.anonymous.domain.board.repository.BoardRepository;
 import com.makefire.anonymous.exception.BadRequestException;
-import com.makefire.anonymous.rest.dto.response.ResponseBoardDto;
+import com.makefire.anonymous.rest.dto.response.board.ResponseBoard;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +24,11 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
-    public ResponseBoardDto selectBoard(Long boardId) {
+    public ResponseBoard selectBoard(Long boardId) {
         Board board = boardRepository.findById(boardId)
                 .orElseThrow(() -> new BadRequestException("Cannot found board"));
 
-        return ResponseBoardDto.from(board);
+        return ResponseBoard.from(board);
     }
 
 }
