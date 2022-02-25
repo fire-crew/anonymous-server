@@ -1,6 +1,6 @@
 spring:
+  profiles:
+    include: local, config.oauth
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-  profiles:
-    include: config.oauth, config.local
