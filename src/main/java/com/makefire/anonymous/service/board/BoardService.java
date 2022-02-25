@@ -3,6 +3,7 @@ package com.makefire.anonymous.service.board;
 import com.makefire.anonymous.domain.board.entity.Board;
 import com.makefire.anonymous.domain.board.repository.BoardRepository;
 import com.makefire.anonymous.exception.BadRequestException;
+import com.makefire.anonymous.rest.dto.request.board.RequestBoard;
 import com.makefire.anonymous.rest.dto.response.board.ResponseBoard;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,18 @@ import org.springframework.stereotype.Service;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+
+    public ResponseBoard insertBoard(RequestBoard requestBoard) {
+
+        Board board = Board.builder()
+                .title(requestBoard.getTitle())
+                .contents(requestBoard.getTitle())
+                .author(requestBoard.getAuthor())
+                .build();
+
+        return ResponseBoard.from(boardRepository.save(board));
+
+    }
 
     public ResponseBoard selectBoard(Long boardId) {
         Board board = boardRepository.findById(boardId)

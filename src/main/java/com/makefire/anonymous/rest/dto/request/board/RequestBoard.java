@@ -3,13 +3,13 @@ package com.makefire.anonymous.rest.dto.request.board;
 
 import lombok.*;
 
+@Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@Getter
 @Builder
 public class RequestBoard {
 
-    private Long id; /* 글 ID */
+//    private Long id; /* 글 ID */
 
     private String title; /* 글 제목 */
 
