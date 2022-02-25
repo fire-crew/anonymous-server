@@ -1,6 +1,6 @@
 package com.makefire.anonymous.rest.controller.api;
 
-import com.makefire.anonymous.domain.board.entity.Board;
+
 import com.makefire.anonymous.rest.dto.request.board.BoardSaveRequestDTO;
 import com.makefire.anonymous.rest.dto.response.board.BoardResponseDTO;
 import com.makefire.anonymous.service.board.BoardService;
