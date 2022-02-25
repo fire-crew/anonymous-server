@@ -28,6 +28,7 @@ public class BoardSaveRequestDTO {
                 .author(author)
                 .authorId(authorId)
                 .build();
+
     }
 
 }
