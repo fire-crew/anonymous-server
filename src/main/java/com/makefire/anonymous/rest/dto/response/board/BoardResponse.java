@@ -6,10 +6,10 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Getter
-@NoArgsConstructor( access = AccessLevel.PRIVATE)
-@AllArgsConstructor( access = AccessLevel.PRIVATE)
+@NoArgsConstructor( access = AccessLevel.PROTECTED)
+@AllArgsConstructor( access = AccessLevel.PROTECTED)
 @Builder
-public class ResponseBoard {
+public class BoardResponse {
 
     private long id; /* 글 ID */
 
@@ -23,9 +23,9 @@ public class ResponseBoard {
 
     private LocalDateTime modifiedDate; /* 마지막 수정일 */
 
-    public static ResponseBoard from(Board board) {
+    public static BoardResponse from(Board board) {
 
-        return ResponseBoard.builder()
+        return BoardResponse.builder()
                 .id(board.getId())
                 .title(board.getTitle())
                 .contents(board.getContents())

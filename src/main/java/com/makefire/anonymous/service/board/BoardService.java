@@ -3,8 +3,8 @@ package com.makefire.anonymous.service.board;
 import com.makefire.anonymous.domain.board.entity.Board;
 import com.makefire.anonymous.domain.board.repository.BoardRepository;
 import com.makefire.anonymous.exception.BadRequestException;
-import com.makefire.anonymous.rest.dto.request.board.RequestBoard;
-import com.makefire.anonymous.rest.dto.response.board.ResponseBoard;
+import com.makefire.anonymous.rest.dto.request.board.BoardRequest;
+import com.makefire.anonymous.rest.dto.response.board.BoardResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,23 +25,23 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
-    public ResponseBoard insertBoard(RequestBoard requestBoard) {
+    public BoardResponse insertBoard(BoardRequest boardRequest) {
 
         Board board = Board.builder()
-                .title(requestBoard.getTitle())
-                .contents(requestBoard.getTitle())
-                .author(requestBoard.getAuthor())
+                .title(boardRequest.getTitle())
+                .contents(boardRequest.getTitle())
+                .author(boardRequest.getAuthor())
                 .build();
 
-        return ResponseBoard.from(boardRepository.save(board));
+        return BoardResponse.from(boardRepository.save(board));
 
     }
 
-    public ResponseBoard selectBoard(Long boardId) {
+    public BoardResponse selectBoard(Long boardId) {
         Board board = boardRepository.findById(boardId)
                 .orElseThrow(() -> new BadRequestException("Cannot found board"));
 
-        return ResponseBoard.from(board);
+        return BoardResponse.from(board);
     }
 
 }
