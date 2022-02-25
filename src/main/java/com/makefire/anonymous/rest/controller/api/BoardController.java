@@ -1,17 +1,13 @@
 package com.makefire.anonymous.rest.controller.api;
 
 import com.makefire.anonymous.domain.board.entity.Board;
-import com.makefire.anonymous.rest.dto.response.Message;
-import com.makefire.anonymous.rest.dto.response.Response;
-import com.makefire.anonymous.rest.dto.response.StatusEnum;
+import com.makefire.anonymous.rest.dto.request.board.BoardSaveRequestDTO;
+import com.makefire.anonymous.rest.dto.response.board.BoardResponseDTO;
 import com.makefire.anonymous.service.board.BoardService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.charset.Charset;
 import java.util.List;
 
 @RestController
@@ -22,36 +18,24 @@ public class BoardController {
     private final BoardService boardService;
 
 
-    @GetMapping
-    public List<Board> searchAllBoards() {
-        return boardService.selectBoards();
+
+    @GetMapping("/findAll")
+    public ResponseEntity<List<BoardResponseDTO>> boardList()  {
+
+        return ResponseEntity.ok().body( boardService.findAll());
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<Long> save(@RequestBody BoardSaveRequestDTO requestDTO) {
+
+        return ResponseEntity.ok().body(boardService.save(requestDTO));
     }
 
 
-    @PostMapping
-    public Board saveBoard(@RequestBody Board board) {
-        return boardService.saveBoard(board);
-    }
+    @GetMapping("/findById/{id}")
+    public ResponseEntity<BoardResponseDTO> findById(@PathVariable("id") Long id) {
 
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public void deleteBoard(@PathVariable Long id) {
-        boardService.deleteBoard(id);
-    }
-
-
-    @GetMapping("/{id}")
-    public Response<Message> getBoard(@PathVariable Long id) {
-        Board board = boardService.getBoard(id);
-        Message message = new Message();
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-
-        message.setStatus(StatusEnum.OK);
-        message.setMessage("성공 코드");
-        message.setData(board);
-
-        return new Response<>(message, headers, HttpStatus.OK);
+        return ResponseEntity.ok().body(boardService.findById(id));
     }
 
 }
