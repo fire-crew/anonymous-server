@@ -1,6 +1,6 @@
-package com.makefire.anonymous.domain.user.repository;
+package com.makefire.anonymous.domain.board.repository;
 
-import com.makefire.anonymous.domain.user.entity.Board;
+import com.makefire.anonymous.domain.board.entity.Board;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

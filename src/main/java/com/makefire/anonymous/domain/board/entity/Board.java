@@ -1,10 +1,9 @@
-package com.makefire.anonymous.domain.user.entity;
+package com.makefire.anonymous.domain.board.entity;
 
+import com.makefire.anonymous.domain.common.BaseEntity;
 import lombok.*;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -23,11 +22,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @Builder
-public class Board {
-
-    @Id
-    @GeneratedValue
-    private long id;
+public class Board extends BaseEntity{
 
     @NotNull
     private String title; /* 글 제목 */
@@ -37,7 +32,7 @@ public class Board {
     @NotNull
     private String author; /* 글 작성자 */
 
-    private String create_date; /* 최초 작성일 */
+//    private String create_date; /* 최초 작성일 */
 
-    private String modified_date; /* 마지막 수정일 */
+//    private String modified_date; /* 마지막 수정일 */
 }
