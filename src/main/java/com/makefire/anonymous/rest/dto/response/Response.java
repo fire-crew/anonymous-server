@@ -18,22 +18,8 @@ import org.springframework.util.MultiValueMap;
  * 2022-01-15 User 최초 생성
  */
 
-public class Response<T> extends HttpEntity<T>{
+public class Response{
 
-    private final HttpStatus status;
 
-    public Response(HttpStatus status) {
-        this(null, null, status);
-    }
-
-    public Response(@Nullable T body, HttpStatus status) {
-        this(body, null, status);
-    }
-
-    public Response(@Nullable T body, @Nullable MultiValueMap<String, String> headers, HttpStatus status) {
-        super(body, headers);
-        Assert.notNull(status, "HttpStatus must not be null");
-        this.status = status;
-    }
 
 }

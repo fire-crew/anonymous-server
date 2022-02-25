@@ -11,13 +11,5 @@ import java.util.Optional;
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
 
-    Board save(Board board);
-
-    Optional<Board> findById(Long id);
-
-    Optional<Board> findByBoardName(String boardName);
-
-    List<Board> findAll();
-
 
 }
