@@ -15,8 +15,8 @@ import org.springframework.context.annotation.Configuration;
 
 import java.time.Duration;
 
-@EnableCaching
-@Configuration
+//@EnableCaching
+//@Configuration
 public class EhCacheConfiguration {
     public static final String DB_CACHE = "db_cache";
 
