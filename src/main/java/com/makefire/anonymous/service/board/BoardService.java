@@ -26,21 +26,13 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     public BoardResponse insertBoard(BoardRequest boardRequest) {
-
-        Board board = Board.builder()
-                .title(boardRequest.getTitle())
-                .contents(boardRequest.getTitle())
-                .author(boardRequest.getAuthor())
-                .build();
-
+        Board board = BoardRequest.to(boardRequest);
         return BoardResponse.from(boardRepository.save(board));
-
     }
 
     public BoardResponse selectBoard(Long boardId) {
         Board board = boardRepository.findById(boardId)
                 .orElseThrow(() -> new BadRequestException("Cannot found board"));
-
         return BoardResponse.from(board);
     }
 

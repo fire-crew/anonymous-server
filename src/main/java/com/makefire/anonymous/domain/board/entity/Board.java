@@ -2,6 +2,7 @@ package com.makefire.anonymous.domain.board.entity;
 
 import com.makefire.anonymous.domain.common.BaseEntity;
 import lombok.*;
+import org.springframework.util.Assert;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
@@ -19,9 +20,7 @@ import javax.validation.constraints.NotNull;
  */
 @Getter
 @Entity
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
-@AllArgsConstructor(access = AccessLevel.PUBLIC)
-@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Board extends BaseEntity{
 
     @NotNull
@@ -32,7 +31,15 @@ public class Board extends BaseEntity{
     @NotNull
     private String author; /* 글 작성자 */
 
-//    private String create_date; /* 최초 작성일 */
+    @Builder(builderMethodName = "toWriteBuilder")
+    public Board (String title, String contents, String author) {
+        Assert.notNull(title, "title must not be null");
+        Assert.notNull(contents, "contents must not be null");
+        Assert.notNull(author, "author must not be null");
 
-//    private String modified_date; /* 마지막 수정일 */
+        this.title = title;
+        this.contents = contents;
+        this.author = author;
+    }
+
 }
