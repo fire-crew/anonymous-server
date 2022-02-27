@@ -2,6 +2,7 @@ package com.makefire.anonymous.service.board;
 
 import com.makefire.anonymous.domain.board.entity.Board;
 import com.makefire.anonymous.domain.board.repository.BoardRepository;
+import com.makefire.anonymous.domain.common.BaseEntity;
 import com.makefire.anonymous.exception.BadRequestException;
 import com.makefire.anonymous.rest.dto.request.board.BoardRequest;
 import com.makefire.anonymous.rest.dto.response.board.BoardResponse;
@@ -30,10 +31,22 @@ public class BoardService {
         return BoardResponse.from(boardRepository.save(board));
     }
 
+    public BoardResponse updateBoard(Long boardId, BoardRequest boardRequest) {
+        // TODO 기존 id 존재 유무 검사 로직 추가 필요
+        Board board = BoardRequest.to(boardId, boardRequest);
+        return BoardResponse.from(boardRepository.save(board));
+    }
+
     public BoardResponse selectBoard(Long boardId) {
-        Board board = boardRepository.findById(boardId)
-                .orElseThrow(() -> new BadRequestException("Cannot found board"));
+        Board board = boardRepository.findById(boardId).orElseThrow(()
+                -> new BadRequestException("Cannot found board"));
         return BoardResponse.from(board);
     }
 
+    public BoardResponse deleteBoard(Long boardId) {
+        Board board = boardRepository.findById(boardId).orElseThrow(()
+                -> new BadRequestException("Cannot found board"));
+        boardRepository.delete(board);
+        return BoardResponse.from(board);
+    }
 }

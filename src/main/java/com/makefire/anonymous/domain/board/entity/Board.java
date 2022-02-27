@@ -1,10 +1,13 @@
 package com.makefire.anonymous.domain.board.entity;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.makefire.anonymous.domain.common.BaseEntity;
 import lombok.*;
 import org.springframework.util.Assert;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -31,10 +34,9 @@ public class Board extends BaseEntity{
     @NotNull
     private String author; /* 글 작성자 */
 
-    @Builder(builderMethodName = "toWriteBuilder")
+    @Builder
     public Board (String title, String contents, String author) {
         Assert.notNull(title, "title must not be null");
-        Assert.notNull(contents, "contents must not be null");
         Assert.notNull(author, "author must not be null");
 
         this.title = title;

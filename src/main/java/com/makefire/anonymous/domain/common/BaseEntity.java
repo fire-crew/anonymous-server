@@ -1,6 +1,6 @@
 package com.makefire.anonymous.domain.common;
 
-import lombok.Getter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -35,4 +35,8 @@ public abstract class BaseEntity{
     @LastModifiedDate
     @Column(insertable = false)
     private LocalDateTime lastModifiedDate;
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

@@ -32,8 +32,19 @@ public class BoardController {
         return ResponseEntity.ok(boardService.insertBoard(boardRequest));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<BoardResponse> updateBoard(@PathVariable("id") Long boardId,
+                                                     @Valid @RequestBody BoardRequest boardRequest) {
+        return ResponseEntity.ok(boardService.updateBoard(boardId, boardRequest));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<BoardResponse> selectBoard(@PathVariable("id") Long boardId) {
         return ResponseEntity.ok(boardService.selectBoard(boardId));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<BoardResponse> deleteBoard(@PathVariable("id") Long boardId) {
+        return ResponseEntity.ok(boardService.deleteBoard(boardId));
     }
 }
