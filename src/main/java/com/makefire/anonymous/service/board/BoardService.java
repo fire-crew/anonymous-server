@@ -44,10 +44,10 @@ public class BoardService {
         return BoardResponse.from(board);
     }
 
-    public String deleteBoard(Long boardId) {
+    public Boolean deleteBoard(Long boardId) {
         Board board = boardRepository.findById(boardId).orElseThrow(()
                 -> new BadRequestException("Cannot found board"));
         boardRepository.delete(board);
-        return "delete success";
+        return true;
     }
 }
