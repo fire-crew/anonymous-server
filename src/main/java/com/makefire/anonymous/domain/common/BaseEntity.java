@@ -26,7 +26,7 @@ public abstract class BaseEntity{
 
     @Id
     @GeneratedValue
-    private long id;
+    protected long id;
 
     @CreatedDate
     @Column(updatable = false)
@@ -36,7 +36,4 @@ public abstract class BaseEntity{
     @Column(insertable = false)
     private LocalDateTime lastModifiedDate;
 
-    public void setId(long id) {
-        this.id = id;
-    }
 }

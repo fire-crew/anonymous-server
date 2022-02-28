@@ -13,6 +13,8 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class BoardRequest {
 
+    private Long id; /* 전역 Sequence */
+
     private String title; /* 글 제목 */
 
     private String contents; /* 글 내용 */
@@ -20,7 +22,8 @@ public class BoardRequest {
     private String author; /* 글 작성자 */
 
     @Builder
-    public BoardRequest (String title, String contents, String author) {
+    public BoardRequest(Long id, String title, String contents, String author) {
+        this.id = id;
         this.title = title;
         this.contents = contents;
         this.author = author;
@@ -32,15 +35,5 @@ public class BoardRequest {
                 .contents(boardRequest.getContents())
                 .author(boardRequest.getAuthor())
                 .build();
-    }
-
-    public static Board to(Long boardId, BoardRequest boardRequest) {
-        Board board = Board.builder()
-                .title(boardRequest.getTitle())
-                .contents(boardRequest.getContents())
-                .author(boardRequest.getAuthor())
-                .build();
-        board.setId(boardId);
-        return board;
     }
 }

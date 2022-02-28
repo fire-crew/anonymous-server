@@ -1,9 +1,10 @@
-package com.makefire.anonymous.rest.core;
+package com.makefire.anonymous.config.web.advice;
 
 import javax.servlet.http.HttpServletResponse;
 
 import com.makefire.anonymous.exception.BadRequestException;
 import com.makefire.anonymous.exception.ModelNotFoundException;
+import com.makefire.anonymous.rest.core.ApiResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
