@@ -1,5 +1,7 @@
 package com.makefire.anonymous.rest.controller;
 
+import com.makefire.anonymous.rest.RestSupport;
+import com.makefire.anonymous.rest.dto.response.Response;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -20,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * ---------------------------------
  */
 @RestController
-public class HealthController {
+public class HealthController extends RestSupport {
 
     @Operation(summary = "test hello", description = "hello api example")
     @ApiResponses({
@@ -30,8 +32,7 @@ public class HealthController {
             @ApiResponse(responseCode = "500", description = "INTERNAL SERVER ERROR !!")
     })
     @GetMapping("/v1/healthCheck")
-    public ResponseEntity<Void> health(){
-        return ResponseEntity.ok()
-                .build();
+    public ResponseEntity<Response> health(){
+        return response("serverChecking...");
     }
 }
