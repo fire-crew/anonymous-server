@@ -1,5 +1,12 @@
 package com.makefire.anonymous.domain.user.entity;
 
+import org.springframework.stereotype.Repository;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
 /**
  *packageName : com.makefire.anonymous
  * fileName : Authority
@@ -11,5 +18,12 @@ package com.makefire.anonymous.domain.user.entity;
  * 22-01-15 최푸름
  * ---------------------------------
  */
+@Entity
 public class Authority {
+    @Id
+    @GeneratedValue
+    long id;
+
+    @NotNull
+    String admin;
 }
