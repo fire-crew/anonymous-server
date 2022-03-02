@@ -4,6 +4,7 @@ import com.makefire.anonymous.rest.dto.request.board.BoardRequest;
 import com.makefire.anonymous.rest.dto.response.board.BoardResponse;
 import com.makefire.anonymous.service.board.BoardService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,28 +24,36 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @RequestMapping("/board")
 @RestController
+@Slf4j
 public class BoardController {
 
     private final BoardService boardService;
 
-    @PostMapping("")
-    public ResponseEntity<BoardResponse> insertBoard(@Valid @RequestBody BoardRequest boardRequest) {
+    @PostMapping
+    public ResponseEntity<BoardResponse> insertBoard(
+            @Valid @RequestBody BoardRequest boardRequest) {
+        log.info("Insert Board Start: boardRequest -> {}", boardRequest.toString());
         return ResponseEntity.ok(boardService.insertBoard(boardRequest));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<BoardResponse> updateBoard(@PathVariable("id") Long boardId,
-                                                     @Valid @RequestBody BoardRequest boardRequest) {
-        return ResponseEntity.ok(boardService.updateBoard(boardId, boardRequest));
+    @PutMapping
+    public ResponseEntity<BoardResponse> updateBoard(
+            @Valid @RequestBody BoardRequest boardRequest) {
+        log.info("Update Board Start: boardRequest -> {}", boardRequest.toString());
+        return ResponseEntity.ok(boardService.updateBoard(boardRequest));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BoardResponse> selectBoard(@PathVariable("id") Long boardId) {
+    public ResponseEntity<BoardResponse> selectBoard(
+            @PathVariable("id") Long boardId) {
+        log.info("Select Board Start: boardId -> {}", boardId.toString());
         return ResponseEntity.ok(boardService.selectBoard(boardId));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<BoardResponse> deleteBoard(@PathVariable("id") Long boardId) {
+    public ResponseEntity<Boolean> deleteBoard(
+            @PathVariable("id") Long boardId) {
+        log.info("Delete Board Start: boardId -> {}", boardId.toString());
         return ResponseEntity.ok(boardService.deleteBoard(boardId));
     }
 }

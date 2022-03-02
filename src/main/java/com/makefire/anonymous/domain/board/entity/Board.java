@@ -2,6 +2,7 @@ package com.makefire.anonymous.domain.board.entity;
 
 import com.fasterxml.jackson.databind.ser.Serializers;
 import com.makefire.anonymous.domain.common.BaseEntity;
+import com.makefire.anonymous.rest.dto.request.board.BoardRequest;
 import lombok.*;
 import org.springframework.util.Assert;
 
@@ -26,22 +27,25 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Board extends BaseEntity{
 
-    @NotNull
+    @NotNull(message = "board title must not be null")
     private String title; /* 글 제목 */
 
     private String contents; /* 글 내용 */
 
-    @NotNull
+    @NotNull(message = "board author must not be null")
     private String author; /* 글 작성자 */
 
     @Builder
     public Board (String title, String contents, String author) {
-        Assert.notNull(title, "title must not be null");
-        Assert.notNull(author, "author must not be null");
-
         this.title = title;
         this.contents = contents;
         this.author = author;
     }
 
+    public void update(BoardRequest boardRequest) {
+        this.id = boardRequest.getId();
+        this.title  = boardRequest.getTitle();
+        this.contents = boardRequest.getContents();
+        this.author = boardRequest.getAuthor();
+    }
 }

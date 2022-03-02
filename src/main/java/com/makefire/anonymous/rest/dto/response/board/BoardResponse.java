@@ -35,11 +35,11 @@ public class BoardResponse {
     }
 
     public static BoardResponse from(Board board) {
-
         return BoardResponse.builder()
                 .id(board.getId())
                 .title(board.getTitle())
                 .contents(board.getContents())
+                .author(board.getAuthor())
                 .createDate(board.getCreatedDate())
                 .modifiedDate(board.getLastModifiedDate())
                 .build();
@@ -53,11 +53,11 @@ public class BoardResponse {
                         .id(board.getId())
                         .title(board.getTitle())
                         .contents(board.getContents())
+                        .author(board.getAuthor())
                         .createDate(board.getCreatedDate())
                         .modifiedDate(board.getLastModifiedDate())
                         .build()
         ));
-
         return boardList;
     }
 }
