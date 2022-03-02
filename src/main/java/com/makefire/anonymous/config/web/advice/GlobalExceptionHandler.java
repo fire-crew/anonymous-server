@@ -3,6 +3,8 @@ package com.makefire.anonymous.config.web.advice;
 import com.makefire.anonymous.exception.BadRequestException;
 import com.makefire.anonymous.exception.DuplicateException;
 import com.makefire.anonymous.exception.ModelNotFoundException;
+import com.makefire.anonymous.rest.RestSupport;
+import com.makefire.anonymous.rest.core.ApiError;
 import com.makefire.anonymous.rest.core.ApiResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -16,10 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestControllerAdvice
 @Slf4j
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler extends RestSupport {
 
-    @ExceptionHandler(value = {BadRequestException.class, IllegalArgumentException.class,
-            IndexOutOfBoundsException.class})
+    @ExceptionHandler(value = {BadRequestException.class, IllegalArgumentException.class, IndexOutOfBoundsException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiResult<?> handleBadRequest(Exception e) {
         log.info("BadRequest Exception, message: {{}}", e.getMessage());
@@ -57,7 +58,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = {DuplicateException.class})
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ApiResult<?> handleConflict(Exception e) {
+    public ApiResult<ApiError> handleConflict(Exception e) {
         log.info("Conflict Exception, message: {{}}", e.getMessage());
         return ApiResult.ERROR(e, HttpStatus.CONFLICT);
     }
