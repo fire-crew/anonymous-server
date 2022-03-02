@@ -1,9 +1,11 @@
 package com.makefire.anonymous.rest.dto.response.board;
 
 import com.makefire.anonymous.domain.board.entity.Board;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

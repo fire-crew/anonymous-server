@@ -1,10 +1,10 @@
 package com.makefire.anonymous.config.web.advice;
 
-import javax.servlet.http.HttpServletResponse;
-
 import com.makefire.anonymous.exception.BadRequestException;
+import com.makefire.anonymous.exception.DuplicateException;
 import com.makefire.anonymous.exception.ModelNotFoundException;
 import com.makefire.anonymous.rest.core.ApiResult;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import lombok.extern.slf4j.Slf4j;
+import javax.servlet.http.HttpServletResponse;
 
 @RestControllerAdvice
 @Slf4j
@@ -53,5 +53,12 @@ public class GlobalExceptionHandler {
         log.info("Exception, message: {{}}", e.getMessage());
         e.printStackTrace();
         return ApiResult.ERROR(e, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(value = {DuplicateException.class})
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ApiResult<?> handleConflict(Exception e) {
+        log.info("Conflict Exception, message: {{}}", e.getMessage());
+        return ApiResult.ERROR(e, HttpStatus.CONFLICT);
     }
 }

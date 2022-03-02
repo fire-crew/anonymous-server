@@ -1,7 +1,7 @@
 package com.makefire.anonymous.rest.controller.api.board;
 
+import com.makefire.anonymous.rest.RestSupport;
 import com.makefire.anonymous.rest.dto.request.board.BoardRequest;
-import com.makefire.anonymous.rest.dto.response.board.BoardResponse;
 import com.makefire.anonymous.service.board.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,35 +25,41 @@ import javax.validation.Valid;
 @RequestMapping("/board")
 @RestController
 @Slf4j
-public class BoardController {
+public class BoardController extends RestSupport {
 
     private final BoardService boardService;
 
     @PostMapping
-    public ResponseEntity<BoardResponse> insertBoard(
+    public ResponseEntity<?> insertBoard(
             @Valid @RequestBody BoardRequest boardRequest) {
         log.info("Insert Board Start: boardRequest -> {}", boardRequest.toString());
-        return ResponseEntity.ok(boardService.insertBoard(boardRequest));
+        return response(boardService.insertBoard(boardRequest));
     }
 
     @PutMapping
-    public ResponseEntity<BoardResponse> updateBoard(
+    public ResponseEntity<?> updateBoard(
             @Valid @RequestBody BoardRequest boardRequest) {
         log.info("Update Board Start: boardRequest -> {}", boardRequest.toString());
-        return ResponseEntity.ok(boardService.updateBoard(boardRequest));
+        return response(boardService.updateBoard(boardRequest));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BoardResponse> selectBoard(
+    public ResponseEntity<?> selectBoard(
             @PathVariable("id") Long boardId) {
         log.info("Select Board Start: boardId -> {}", boardId.toString());
-        return ResponseEntity.ok(boardService.selectBoard(boardId));
+        return response(boardService.selectBoard(boardId));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> deleteBoard(
+    public ResponseEntity<?> deleteBoard(
             @PathVariable("id") Long boardId) {
         log.info("Delete Board Start: boardId -> {}", boardId.toString());
-        return ResponseEntity.ok(boardService.deleteBoard(boardId));
+        return response(boardService.deleteBoard(boardId));
+    }
+
+    @GetMapping("/lists")
+    public ResponseEntity<?> selectBoardList() {
+        log.info("Select Board List Start");
+        return response(boardService.selectBoardlist());
     }
 }

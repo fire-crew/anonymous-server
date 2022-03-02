@@ -2,12 +2,15 @@ package com.makefire.anonymous.service.board;
 
 import com.makefire.anonymous.domain.board.entity.Board;
 import com.makefire.anonymous.domain.board.repository.BoardRepository;
-import com.makefire.anonymous.exception.BadRequestException;
+import com.makefire.anonymous.exception.DuplicateException;
+import com.makefire.anonymous.exception.ModelNotFoundException;
 import com.makefire.anonymous.rest.dto.request.board.BoardRequest;
 import com.makefire.anonymous.rest.dto.response.board.BoardResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * packageName : com.makefire.anonymous
@@ -28,26 +31,38 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     public BoardResponse insertBoard(BoardRequest boardRequest) {
+        if (boardRequest.getId() != null) {
+            boardRepository.findById(boardRequest.getId()).ifPresent(board -> {
+                throw new DuplicateException(DuplicateException.BOARD_CONFLICT);
+            });
+        }
         Board board = BoardRequest.to(boardRequest);
         return BoardResponse.from(boardRepository.save(board));
     }
 
     public BoardResponse updateBoard(BoardRequest boardRequest) {
-        Board board = BoardRequest.to(boardRequest);
+        Board board = boardRepository.findById(boardRequest.getId()).orElseThrow(()
+                -> new ModelNotFoundException(ModelNotFoundException.BOARD_NOT_FOUND));
         board.update(boardRequest);
-        return BoardResponse.from(boardRepository.save(board));
+        return BoardResponse.from(board);
     }
 
     public BoardResponse selectBoard(Long boardId) {
         Board board = boardRepository.findById(boardId).orElseThrow(()
-                -> new BadRequestException("Cannot found board"));
+                -> new ModelNotFoundException(ModelNotFoundException.BOARD_NOT_FOUND));
         return BoardResponse.from(board);
     }
 
     public Boolean deleteBoard(Long boardId) {
         Board board = boardRepository.findById(boardId).orElseThrow(()
-                -> new BadRequestException("Cannot found board"));
+                -> new ModelNotFoundException(ModelNotFoundException.BOARD_NOT_FOUND));
         boardRepository.delete(board);
         return true;
+    }
+
+    public List<BoardResponse> selectBoardlist() {
+        // TODO 페이징 처리 필요
+        List<Board> boardList = boardRepository.findAll();
+        return BoardResponse.fromList(boardList);
     }
 }
