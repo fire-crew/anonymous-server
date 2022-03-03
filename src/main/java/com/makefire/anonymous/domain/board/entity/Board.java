@@ -12,11 +12,10 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="BOARD")
+@Table(name = "BOARD")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Board extends BasicEntity {
-
 
 
     @Column(nullable = false)

@@ -7,26 +7,26 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class BoardSaveRequestDTO {
+public class BoardRequest {
     private String title;
     private String content;
     private String author;
     private Long authorId;
 
     @Builder
-    public BoardSaveRequestDTO(String title, String content, String author, Long authorId) {
+    public BoardRequest(String title, String content, String author, Long authorId) {
         this.title = title;
         this.content = content;
         this.author = author;
         this.authorId = authorId;
     }
 
-    public Board toEntity() {
+    public static Board toEntity(BoardRequest boardRequest) {
         return Board.builder()
-                .title(title)
-                .content(content)
-                .author(author)
-                .authorId(authorId)
+                .title(boardRequest.title)
+                .content(boardRequest.content)
+                .author(boardRequest.author)
+                .authorId(boardRequest.authorId)
                 .build();
 
     }
