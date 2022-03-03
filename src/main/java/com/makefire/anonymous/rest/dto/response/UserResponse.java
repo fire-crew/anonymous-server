@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * packageName : com.makefire.anonymous.rest.dto.response
  * fileName : Response
@@ -43,6 +46,19 @@ public class UserResponse {
                 .name(user.getName())
                 .password(user.getPassword())
                 .build();
+    }
+
+    public static List<UserResponse> fromList(List<User> users){
+        List<UserResponse> userList = new ArrayList<>();
+
+        users.forEach(user -> userList.add(
+                UserResponse.builder()
+                        .id(user.getId())
+                        .userId(user.getUserId())
+                        .name(user.getName())
+                        .build()
+        ));
+        return userList;
     }
 
 }

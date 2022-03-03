@@ -29,7 +29,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    //유저 생성
+    //사용자 생성
     @Transactional
     public UserResponse save(UserRequest userRequest){
 
@@ -37,14 +37,18 @@ public class UserService {
         return UserResponse.from(userRepository.save(user));
     }
 
-    //유저 조회
+    //사용자 조회
     public UserResponse getUser(Long userId){
         User user = userRepository.findById(userId).orElseThrow(()
         -> new BadRequestException("해당 사용자를 찾을수없습니다. 사용자 id를 확인해주세요."));
         return UserResponse.from(user);
     }
 
-    //유저 정보 업데이트
+    //사용자 목록
+    public List<UserResponse> getUserList(){
+        List<User> userList = userRepository.findAll();
+        return UserResponse.fromList(userList);
+    }
 
 }
 

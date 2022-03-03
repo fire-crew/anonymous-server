@@ -30,6 +30,7 @@ public class UserController extends RestSupport{
 
     private final UserService userService;
 
+    //사용자 등록
     @PostMapping("/userSignUp")
     public ResponseEntity<Response> insertUser(@Valid @RequestBody UserRequest userRequest){
         return response(userService.save(userRequest));
@@ -37,9 +38,16 @@ public class UserController extends RestSupport{
 
     }
 
+    //사용자 조회
     @GetMapping("/findUserId/{id}")
     public ResponseEntity<Response> getUser(@PathVariable("id") long userId){
         return response(userService.getUser(userId));
+    }
+
+    //사용자 목록
+    @GetMapping("/userList")
+    public ResponseEntity<Response> getUserList(){
+        return response(userService.getUserList());
     }
 
 }
