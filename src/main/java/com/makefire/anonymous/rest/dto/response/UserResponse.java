@@ -1,8 +1,10 @@
 package com.makefire.anonymous.rest.dto.response;
 
 import com.makefire.anonymous.domain.user.entity.User;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * packageName : com.makefire.anonymous.rest.dto.response
@@ -17,17 +19,30 @@ import lombok.Getter;
  */
 
 @Getter
-public class ResponseUser {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class UserResponse {
 
     private Long id; // id값
     private String userId; //사용자 아이디
     private String name; //이름
     private String password; //패스워드
 
-    public ResponseUser(User user){
-        this.id= user.getId();
-        this.userId = user.getUserId();
-        this.name = user.getName();
-        this.password = user.getPassword();
+    @Builder
+    public UserResponse(Long id, String userId, String name, String password){
+        this.id= id;
+        this.userId = userId;
+        this.name = name;
+        this.password = password;
     }
+
+    public static UserResponse from(User user){
+
+        return UserResponse.builder()
+                .id(user.getId())
+                .userId(user.getUserId())
+                .name(user.getName())
+                .password(user.getPassword())
+                .build();
+    }
+
 }

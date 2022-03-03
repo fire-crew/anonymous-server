@@ -2,8 +2,9 @@ package com.makefire.anonymous.service.user;
 
 import com.makefire.anonymous.domain.user.entity.User;
 import com.makefire.anonymous.domain.user.repository.UserRepository;
-import com.makefire.anonymous.rest.dto.request.RequestUser;
-import com.makefire.anonymous.rest.dto.response.ResponseUser;
+import com.makefire.anonymous.exception.BadRequestException;
+import com.makefire.anonymous.rest.dto.request.UserRequest;
+import com.makefire.anonymous.rest.dto.response.UserResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,16 +31,17 @@ public class UserService {
 
     //유저 생성
     @Transactional
-    public Long save(final RequestUser params){
+    public UserResponse save(UserRequest userRequest){
 
-        User user = userRepository.save(params.toEntity());
-        return user.getId();
+        User user = UserRequest.toEntity(userRequest);
+        return UserResponse.from(userRepository.save(user));
     }
 
     //유저 조회
-    public List<ResponseUser> findAll(){
-        List<User> userList = userRepository.findAll();
-        return userList.stream().map(ResponseUser::new).collect(Collectors.toList());
+    public UserResponse getUser(Long userId){
+        User user = userRepository.findById(userId).orElseThrow(()
+        -> new BadRequestException("해당 사용자를 찾을수없습니다. 사용자 id를 확인해주세요."));
+        return UserResponse.from(user);
     }
 
     //유저 정보 업데이트
