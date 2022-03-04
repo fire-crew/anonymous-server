@@ -15,13 +15,12 @@ public abstract class BasicEntity {
     @GeneratedValue
     private Long id;
 
-
     @CreatedDate
-    @Column(name = "created_date")
+    @Column(name = "created_date",updatable = false)
     private LocalDateTime createdDate;
 
     @LastModifiedDate
-    @Column(name = "modifiedDate")
+    @Column(name = "modifiedDate",insertable = false)
     private LocalDateTime modifiedDate;
 
 

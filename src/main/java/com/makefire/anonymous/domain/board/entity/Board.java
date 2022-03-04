@@ -2,30 +2,27 @@ package com.makefire.anonymous.domain.board.entity;
 
 
 import com.makefire.anonymous.domain.common.BasicEntity;
-import lombok.*;
-
-
-import javax.persistence.Column;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name = "BOARD")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Board extends BasicEntity {
 
 
-    @Column(nullable = false)
+    @NotNull(message = "Title must not be null")
     private String title;
 
-    @Lob
-    @Column(nullable = false)
+
     private String content;
 
-
+    @NotNull(message = "Author must not be null")
     private String author;
 
     private Long authorId;

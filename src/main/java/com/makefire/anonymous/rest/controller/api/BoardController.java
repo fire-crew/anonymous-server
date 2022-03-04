@@ -35,6 +35,10 @@ public class BoardController extends RestSupport {
 
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<Response> deleteBoard(@PathVariable("id") Long id) {
+        return response(boardService.deleteBoard(id));
+    }
 
 }
 

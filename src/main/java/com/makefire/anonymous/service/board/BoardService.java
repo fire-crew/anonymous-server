@@ -29,4 +29,11 @@ public class BoardService {
         Board board = BoardRequest.toEntity(boardRequest);
         return BoardResponse.from(boardRepository.save(board));
     }
+
+    public Boolean deleteBoard(Long id) {
+        Board board = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException());
+        boardRepository.delete(board);
+        return true;
+
+    }
 }
