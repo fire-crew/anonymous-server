@@ -2,6 +2,7 @@ package com.makefire.anonymous.domain.board.entity;
 
 
 import com.makefire.anonymous.domain.common.BasicEntity;
+import com.makefire.anonymous.rest.dto.request.board.BoardRequest;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,6 +35,14 @@ public class Board extends BasicEntity {
         this.content = content;
         this.author = author;
         this.authorId = authorId;
+    }
+
+    public void update(BoardRequest boardRequest){
+        this.id = boardRequest.getId();
+        this.title = boardRequest.getTitle();
+        this.content = boardRequest.getContent();
+        this.author = boardRequest.getAuthor();
+        this.authorId = boardRequest.getAuthorId();
     }
 
 }

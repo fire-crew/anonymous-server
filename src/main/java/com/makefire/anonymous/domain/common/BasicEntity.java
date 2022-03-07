@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public abstract class BasicEntity {
     @Id
     @GeneratedValue
-    private Long id;
+    protected Long id;
 
     @CreatedDate
     @Column(name = "created_date",updatable = false)

@@ -8,13 +8,15 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class BoardRequest {
+    private Long id;
     private String title;
     private String content;
     private String author;
     private Long authorId;
 
     @Builder
-    public BoardRequest(String title, String content, String author, Long authorId) {
+    public BoardRequest(Long id,String title, String content, String author, Long authorId) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.author = author;

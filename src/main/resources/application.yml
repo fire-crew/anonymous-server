@@ -4,22 +4,4 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
-  jpa:
-    show_sql: true
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
-  datasource:
-    username: test  # 사용자 이름 (로그인 시 사용)
-    password: 1234
-    hikari:
-      jdbc-url: jdbc:h2:mem:testdb;MODE=MYSQL
-  h2:
-    console:
-      enabled: true
-      settings:
-        web-allow-others: true
-      path: /h2-console
 

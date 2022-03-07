@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -39,6 +41,23 @@ public class BoardResponse {
                 .createdDate(board.getCreatedDate())
                 .modifiedDate(board.getModifiedDate())
                 .build();
+    }
+
+    public static List<BoardResponse> fromList(List<Board> boardList) {
+        List<BoardResponse> boardResponseList = new ArrayList<>();
+        for (Board board : boardList
+        ) {
+            boardResponseList.add(BoardResponse.builder()
+                    .id(board.getId())
+                    .authorId(board.getAuthorId())
+                    .title(board.getTitle())
+                    .content(board.getContent())
+                    .author(board.getAuthor())
+                    .createdDate(board.getCreatedDate())
+                    .modifiedDate(board.getModifiedDate())
+                    .build());
+        }
+        return boardResponseList;
     }
 
 }

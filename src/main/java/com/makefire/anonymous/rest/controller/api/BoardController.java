@@ -35,6 +35,16 @@ public class BoardController extends RestSupport {
 
     }
 
+    @GetMapping("/list")
+    public ResponseEntity<Response> selectBoards() {
+        return response(boardService.selectBoards());
+    }
+
+    @PutMapping
+    public ResponseEntity<Response> updateBoard(@Valid @RequestBody BoardRequest boardRequest) {
+        return response(boardService.updateBoard(boardRequest));
+    }
+
     @DeleteMapping("{id}")
     public ResponseEntity<Response> deleteBoard(@PathVariable("id") Long id) {
         return response(boardService.deleteBoard(id));
