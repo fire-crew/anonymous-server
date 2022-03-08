@@ -6,13 +6,13 @@ import com.makefire.anonymous.rest.dto.request.board.BoardRequest;
 import com.makefire.anonymous.rest.dto.response.board.BoardResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+
 import java.util.List;
 
 @Service
 @AllArgsConstructor
-@Transactional
 public class BoardService {
     private final BoardRepository boardRepository;
 
@@ -27,11 +27,13 @@ public class BoardService {
         return BoardResponse.fromList(boardList);
     }
 
+    @Transactional
     public BoardResponse createBoard(BoardRequest boardRequest) {
         Board board = BoardRequest.toEntity(boardRequest);
         return BoardResponse.from(boardRepository.save(board));
     }
 
+    @Transactional(rollbackFor = IllegalArgumentException.class)
     public Boolean updateBoard(BoardRequest boardRequest) {
         Board board = boardRepository.findById(boardRequest.getId()).orElseThrow(() -> new IllegalArgumentException());
         board.update(boardRequest);
