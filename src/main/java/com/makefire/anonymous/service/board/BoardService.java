@@ -29,6 +29,26 @@ import java.util.List;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+//    private final ObjectMapper defaultObjectMapper = new ObjectMapper();
+//    private volatile ObjectMapper objectMapper = null;
+
+//    public ObjectMapper mapper() {
+//        return objectMapper == null ? defaultObjectMapper : objectMapper;
+//    }
+//
+//    public ObjectWriter writer() {
+//        return mapper().writer().withDefaultPrettyPrinter();
+//    }
+//
+//    public <T> String toJsonString(T model) {
+//        ObjectWriter ow = writer().withDefaultPrettyPrinter();
+//        try {
+//            return ow.writeValueAsString(model);
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//        }
+//        return "";
+//    }
 
     public BoardResponse insertBoard(BoardRequest boardRequest) {
         if (boardRequest.getId() != null) {
