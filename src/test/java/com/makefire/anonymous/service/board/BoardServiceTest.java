@@ -2,6 +2,7 @@ package com.makefire.anonymous.service.board;
 
 import com.makefire.anonymous.rest.dto.request.board.BoardRequest;
 import com.makefire.anonymous.rest.dto.response.board.BoardResponse;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,12 +42,14 @@ public class BoardServiceTest {
     @Test
     @DisplayName("BoardService insertBoard 메소드 테스트")
     void insertBoardTest() {
-        // when 
+        // when
         BoardResponse savedBoard = boardService.insertBoard(boardRequest);
 
         // then
-        assertEquals("Test title", savedBoard.getTitle());
-        assertEquals("Test contents", savedBoard.getContents());
-        assertEquals("Test author", savedBoard.getAuthor());
+        Assertions.assertAll(
+                () -> assertEquals(boardRequest.getTitle(), savedBoard.getTitle()),
+                () -> assertEquals(boardRequest.getContents(), savedBoard.getContents()),
+                () -> assertEquals(boardRequest.getAuthor(), savedBoard.getAuthor())
+        );
     }
 }

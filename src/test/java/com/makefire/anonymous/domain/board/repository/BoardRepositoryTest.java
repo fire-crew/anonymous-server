@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * ---------------------------------
  */
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) // FIXME MemoryDB 사용할 수 있도록 변경 필요
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) // FIXME -> MemoryDB 사용할 수 있도록 변경 필요
 public class BoardRepositoryTest {
 
     @Autowired
@@ -30,7 +30,6 @@ public class BoardRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        // given
         board = Board.builder()
                 .title("Test Title")
                 .contents("Test Contents")

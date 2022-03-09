@@ -5,6 +5,7 @@ import com.makefire.anonymous.rest.controller.api.board.BoardController;
 import com.makefire.anonymous.rest.dto.request.board.BoardRequest;
 import com.makefire.anonymous.rest.dto.response.board.BoardResponse;
 import com.makefire.anonymous.service.board.BoardService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,8 +16,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -45,8 +48,6 @@ public class BoardControllerTest {
 
     private BoardRequest boardRequest;
 
-    private Board board;
-
     @BeforeEach
     void setUp() {
         boardRequest = BoardRequest.builder()
@@ -54,7 +55,6 @@ public class BoardControllerTest {
                 .contents("Test contents")
                 .author("Test author")
                 .build();
-        board = BoardRequest.to(boardRequest);
     }
 
     @Test
@@ -62,23 +62,19 @@ public class BoardControllerTest {
     void insertBoardTest() throws Exception {
         // given
         given(boardService.insertBoard(any(BoardRequest.class)))
-                .willReturn(BoardResponse.from(board));
+                .willReturn(BoardResponse.from(BoardRequest.to(boardRequest)));
 
         // when
-        final ResultActions actions = mvc.perform(post("/board")
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .characterEncoding("UTF-8")
-                .content("{"
-                        + " \"title\" : \"test Title\", "
-                        + " \"contents\" : \"test Contents\", "
-                        + " \"author\": \"test Author\" "
-                        + "}"))
-                .andDo(print());
+        this.mvc.perform(post("/board")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{"
+                                + " \"title\" : \"Test title\", "
+                                + " \"contents\" : \"Test contents\", "
+                                + " \"author\": \"Test author\" "
+                                + "}"))
 
-        // then
-        actions
-                .andExpect(status().isOk()) // FIXME HttpStatusCode 200? 201?
+                // then
+                .andExpect(status().isOk()) // FIXME -> HttpStatusCode 200? 201? What is Right?
                 .andExpect(jsonPath("data.title").value(boardRequest.getTitle()))
                 .andExpect(jsonPath("data.contents").value(boardRequest.getContents()))
                 .andExpect(jsonPath("data.author").value(boardRequest.getAuthor()))
