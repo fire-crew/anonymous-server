@@ -38,7 +38,7 @@ public class BoardRepositoryTest {
     }
 
     @Test
-    @DisplayName("BoardRepository 데이터 적재 테스트")
+    @DisplayName("Given Board When Save Board then It Should be Same Board And Saved Board")
     void saveBoardTest() {
         // when
         Board savedBoard = boardRepository.save(board);

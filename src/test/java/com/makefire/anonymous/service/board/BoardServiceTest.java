@@ -40,7 +40,7 @@ public class BoardServiceTest {
     }
 
     @Test
-    @DisplayName("BoardService insertBoard 메소드 테스트")
+    @DisplayName("Given BoardRequest When Write Board then It Should be Same BoardRequest And Saved Board")
     void insertBoardTest() {
         // when
         BoardResponse savedBoard = boardService.insertBoard(boardRequest);

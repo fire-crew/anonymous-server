@@ -58,7 +58,7 @@ public class BoardControllerTest {
     }
 
     @Test
-    @DisplayName("BoardController insertBoard 메소드 테스트")
+    @DisplayName("Given BoardRequest When Insert Board then It Should be Same Board Request And Method Result")
     void insertBoardTest() throws Exception {
         // given
         given(boardService.insertBoard(any(BoardRequest.class)))
