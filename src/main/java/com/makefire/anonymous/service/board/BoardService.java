@@ -16,7 +16,6 @@ import java.util.List;
 public class BoardService {
     private final BoardRepository boardRepository;
 
-
     public BoardResponse selectBoard(Long id) {
         Board board = boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException());
         return BoardResponse.from(board);
