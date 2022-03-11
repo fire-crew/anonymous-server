@@ -25,31 +25,11 @@ import java.util.List;
  */
 @Service
 @AllArgsConstructor
-@Transactional
 public class BoardService {
 
     private final BoardRepository boardRepository;
-//    private final ObjectMapper defaultObjectMapper = new ObjectMapper();
-//    private volatile ObjectMapper objectMapper = null;
 
-//    public ObjectMapper mapper() {
-//        return objectMapper == null ? defaultObjectMapper : objectMapper;
-//    }
-//
-//    public ObjectWriter writer() {
-//        return mapper().writer().withDefaultPrettyPrinter();
-//    }
-//
-//    public <T> String toJsonString(T model) {
-//        ObjectWriter ow = writer().withDefaultPrettyPrinter();
-//        try {
-//            return ow.writeValueAsString(model);
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//        }
-//        return "";
-//    }
-
+    @Transactional
     public BoardResponse insertBoard(BoardRequest boardRequest) {
         if (boardRequest.getId() != null) {
             boardRepository.findById(boardRequest.getId()).ifPresent(board -> {
@@ -60,6 +40,7 @@ public class BoardService {
         return BoardResponse.from(boardRepository.save(board));
     }
 
+    @Transactional
     public BoardResponse updateBoard(BoardRequest boardRequest) {
         Board board = boardRepository.findById(boardRequest.getId()).orElseThrow(()
                 -> new ModelNotFoundException(ModelNotFoundException.BOARD_NOT_FOUND));
@@ -73,6 +54,7 @@ public class BoardService {
         return BoardResponse.from(board);
     }
 
+    @Transactional
     public Boolean deleteBoard(Long boardId) {
         Board board = boardRepository.findById(boardId).orElseThrow(()
                 -> new ModelNotFoundException(ModelNotFoundException.BOARD_NOT_FOUND));

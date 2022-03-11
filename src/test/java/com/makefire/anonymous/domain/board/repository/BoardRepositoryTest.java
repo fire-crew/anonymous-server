@@ -1,10 +1,12 @@
 package com.makefire.anonymous.domain.board.repository;
 
 import com.makefire.anonymous.domain.board.entity.Board;
+import com.makefire.anonymous.support.SpringTestSupport;
+import com.makefire.anonymous.support.fixture.BoardFixture;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -19,35 +21,32 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * 2022-03-03  kjho94    최초 생성
  * ---------------------------------
  */
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) // FIXME -> MemoryDB 사용할 수 있도록 변경 필요
-public class BoardRepositoryTest {
+public class BoardRepositoryTest extends SpringTestSupport {
 
     @Autowired
     private BoardRepository boardRepository;
 
-    private Board board;
-
     @BeforeEach
     void setUp() {
-        board = Board.builder()
-                .title("Test Title")
-                .contents("Test Contents")
-                .author("Test Author")
-                .build();
+        List<Board> boardData = BoardFixture.createBoardData();
+        boardRepository.saveAll(boardData);
+    }
+
+    @AfterEach
+    void setDown() {
+        boardRepository.deleteAll();
     }
 
     @Test
-    @DisplayName("Given Board When Save Board then It Should be Same Board And Saved Board")
-    void saveBoardTest() {
-        // when
-        Board savedBoard = boardRepository.save(board);
+    @DisplayName("조건 없이 게시판 전체 글 목록을 가져온다.")
+    void selectBoardsTest() {
+        List<Board> board = boardRepository.findAll();
 
-        // then
         Assertions.assertAll(
-                () -> assertEquals(board.getTitle(), savedBoard.getTitle()),
-                () -> assertEquals(board.getContents(), savedBoard.getContents()),
-                () -> assertEquals(board.getAuthor(), savedBoard.getAuthor())
+                () -> assertEquals(board.size(), 3),
+                () -> assertEquals(board.get(0).getTitle(), "Test title 1"),
+                () -> assertEquals(board.get(1).getContents(), "Test contents 2"),
+                () -> assertEquals(board.get(2).getAuthor(), "Test author 3")
         );
     }
 }

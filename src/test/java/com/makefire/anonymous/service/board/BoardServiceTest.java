@@ -1,15 +1,11 @@
 package com.makefire.anonymous.service.board;
 
 import com.makefire.anonymous.rest.dto.request.board.BoardRequest;
-import com.makefire.anonymous.rest.dto.response.board.BoardResponse;
-import org.junit.jupiter.api.Assertions;
+import com.makefire.anonymous.support.SpringTestSupport;
+import com.makefire.anonymous.support.fixture.BoardFixture;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * packageName : com.makefire.anonymous.service.board
@@ -22,8 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * 2022-03-04  kjho94    최초 생성
  * ---------------------------------
  */
-@SpringBootTest
-public class BoardServiceTest {
+public class BoardServiceTest extends SpringTestSupport {
 
     @Autowired
     private BoardService boardService;
@@ -32,24 +27,29 @@ public class BoardServiceTest {
 
     @BeforeEach
     void setUp() {
-        boardRequest = BoardRequest.builder()
-                .title("Test title")
-                .contents("Test contents")
-                .author("Test author")
-                .build();
+        boardRequest = BoardFixture.createBoardRequestData();
     }
 
-    @Test
-    @DisplayName("Given BoardRequest When Write Board then It Should be Same BoardRequest And Saved Board")
-    void insertBoardTest() {
-        // when
-        BoardResponse savedBoard = boardService.insertBoard(boardRequest);
-
-        // then
-        Assertions.assertAll(
-                () -> assertEquals(boardRequest.getTitle(), savedBoard.getTitle()),
-                () -> assertEquals(boardRequest.getContents(), savedBoard.getContents()),
-                () -> assertEquals(boardRequest.getAuthor(), savedBoard.getAuthor())
-        );
+    @AfterEach
+    void setDown() {
     }
+
+//    @Test
+//    @DisplayName("1번 게시물을 조회한다.")
+//    void selectBoardTest() {
+//        boardService.insertBoard(boardRequest);
+//        BoardResponse board = boardService.selectBoard(1L);
+//
+//        Assertions.assertAll(
+//                () -> assertEquals(boardRequest.getTitle(), board.getTitle()),
+//                () -> assertEquals(boardRequest.getContents(), board.getContents()),
+//                () -> assertEquals(boardRequest.getAuthor(), board.getAuthor())
+//        );
+//    }
+//    @Test
+//    @DisplayName("게시판 서비스 수정 테스트")
+//    void updateBoardTest() {
+//        BoardRequest boardRequest = BoardFixture.createUpdateBoardRequestData();
+//        boardService.updateBoard(boardRequest);
+//    }
 }

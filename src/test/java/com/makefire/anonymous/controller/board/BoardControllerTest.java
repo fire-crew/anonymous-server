@@ -1,25 +1,18 @@
 package com.makefire.anonymous.controller.board;
 
-import com.makefire.anonymous.domain.board.entity.Board;
-import com.makefire.anonymous.rest.controller.api.board.BoardController;
 import com.makefire.anonymous.rest.dto.request.board.BoardRequest;
 import com.makefire.anonymous.rest.dto.response.board.BoardResponse;
 import com.makefire.anonymous.service.board.BoardService;
-import org.junit.jupiter.api.Assertions;
+import com.makefire.anonymous.support.SpringMockMvcTestSupport;
+import com.makefire.anonymous.support.fixture.BoardFixture;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultActions;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -36,12 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * 2022-03-03  kjho94    최초 생성
  * ---------------------------------
  */
-
-@WebMvcTest(BoardController.class)
-public class BoardControllerTest {
-
-    @Autowired
-    private MockMvc mvc;
+public class BoardControllerTest extends SpringMockMvcTestSupport {
 
     @MockBean
     private BoardService boardService;
@@ -50,22 +38,17 @@ public class BoardControllerTest {
 
     @BeforeEach
     void setUp() {
-        boardRequest = BoardRequest.builder()
-                .title("Test title")
-                .contents("Test contents")
-                .author("Test author")
-                .build();
+        boardRequest = BoardFixture.createBoardRequestData();
+        boardService.insertBoard(boardRequest);
     }
 
     @Test
-    @DisplayName("Given BoardRequest When Insert Board then It Should be Same Board Request And Method Result")
+    @DisplayName("게시글을 등록하고 그 값을 비교한다.")
     void insertBoardTest() throws Exception {
-        // given
         given(boardService.insertBoard(any(BoardRequest.class)))
                 .willReturn(BoardResponse.from(BoardRequest.to(boardRequest)));
 
-        // when
-        this.mvc.perform(post("/board")
+        this.mockMvc.perform(post("/board")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{"
                                 + " \"title\" : \"Test title\", "
@@ -73,7 +56,6 @@ public class BoardControllerTest {
                                 + " \"author\": \"Test author\" "
                                 + "}"))
 
-                // then
                 .andExpect(status().isOk()) // FIXME -> HttpStatusCode 200? 201? What is Right?
                 .andExpect(jsonPath("data.title").value(boardRequest.getTitle()))
                 .andExpect(jsonPath("data.contents").value(boardRequest.getContents()))
