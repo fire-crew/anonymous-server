@@ -1,10 +1,14 @@
 package com.makefire.anonymous.domain.board.repository;
 
 import com.makefire.anonymous.domain.board.entity.Board;
-import com.makefire.anonymous.support.SpringTestSupport;
 import com.makefire.anonymous.support.fixture.BoardFixture;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
@@ -21,7 +25,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * 2022-03-03  kjho94    최초 생성
  * ---------------------------------
  */
-public class BoardRepositoryTest extends SpringTestSupport {
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@ActiveProfiles("test")
+public class BoardRepositoryTest {
 
     @Autowired
     private BoardRepository boardRepository;
@@ -32,21 +39,21 @@ public class BoardRepositoryTest extends SpringTestSupport {
         boardRepository.saveAll(boardData);
     }
 
-    @AfterEach
-    void setDown() {
-        boardRepository.deleteAll();
+    @Test
+    void getBoardTest() {
+        Board board = boardRepository.findById(1L).get();
+
+        Assertions.assertAll(
+                () -> assertEquals(board.getId(), 1L)
+        );
     }
 
     @Test
-    @DisplayName("조건 없이 게시판 전체 글 목록을 가져온다.")
-    void selectBoardsTest() {
-        List<Board> board = boardRepository.findAll();
+    void getListOfBoardTest() {
+        List<Board> boards = boardRepository.findAll();
 
         Assertions.assertAll(
-                () -> assertEquals(board.size(), 3),
-                () -> assertEquals(board.get(0).getTitle(), "Test title 1"),
-                () -> assertEquals(board.get(1).getContents(), "Test contents 2"),
-                () -> assertEquals(board.get(2).getAuthor(), "Test author 3")
+                () -> assertEquals(boards.size(), 3)
         );
     }
 }
