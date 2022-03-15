@@ -2,9 +2,11 @@ package com.makefire.anonymous.support.fixture;
 
 import com.makefire.anonymous.domain.board.entity.Board;
 import com.makefire.anonymous.rest.dto.request.board.BoardRequest;
+import com.makefire.anonymous.rest.dto.response.board.BoardResponse;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.Arrays.asList;
 
 /**
  * packageName : com.makefire.anonymous.support.fixture.board
@@ -19,17 +21,15 @@ import java.util.List;
  */
 public class BoardFixture {
 
-    public static BoardRequest createBoardRequestData() {
-        return BoardRequest.builder()
-                .title("Test title")
-                .contents("Test contents")
-                .author("Test author")
+    public static Board createOneBoard() {
+        return Board.builder()
+                .title("Test title One")
+                .contents("Test contents One")
+                .author("Test author One")
                 .build();
     }
 
-    public static List<Board> createBoardData() {
-
-        List<Board> boardList = new ArrayList<>();
+    public static List<Board> createSeveralBoard() {
 
         Board board1 = Board.builder()
                 .title("Test title 1")
@@ -49,10 +49,41 @@ public class BoardFixture {
                 .author("Test author 3")
                 .build();
 
-        boardList.add(board1);
-        boardList.add(board2);
-        boardList.add(board3);
+        return asList(board1, board2, board3);
+    }
 
-        return boardList;
+    public static BoardRequest createOneBoardRequest() {
+        return BoardRequest.builder()
+                .title("Test title One")
+                .contents("Test contents One")
+                .author("Test author One")
+                .build();
+    }
+
+    public static BoardResponse createOneBoardResponse() {
+        return BoardResponse.builder()
+                .id(1L)
+                .title("Test title One")
+                .contents("Test contents One")
+                .author("Test author One")
+                .build();
+    }
+
+    public static BoardRequest createOneUpdateBoardRequest() {
+        return BoardRequest.builder()
+                .id(1L)
+                .title("Test Update title One")
+                .contents("Test Update contents One")
+                .author("Test Update author One")
+                .build();
+    }
+
+    public static BoardResponse createOneUpdateBoardResponse() {
+        return BoardResponse.builder()
+                .id(1L)
+                .title("Test Update title One")
+                .contents("Test Update contents One")
+                .author("Test Update author One")
+                .build();
     }
 }

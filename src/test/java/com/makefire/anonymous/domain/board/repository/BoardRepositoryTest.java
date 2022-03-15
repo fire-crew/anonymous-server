@@ -1,14 +1,13 @@
 package com.makefire.anonymous.domain.board.repository;
 
 import com.makefire.anonymous.domain.board.entity.Board;
+import com.makefire.anonymous.support.RepositoryTestSupport;
 import com.makefire.anonymous.support.fixture.BoardFixture;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
@@ -25,21 +24,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * 2022-03-03  kjho94    최초 생성
  * ---------------------------------
  */
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ActiveProfiles("test")
-public class BoardRepositoryTest {
+public class BoardRepositoryTest extends RepositoryTestSupport {
 
     @Autowired
     private BoardRepository boardRepository;
 
     @BeforeEach
     void setUp() {
-        List<Board> boardData = BoardFixture.createBoardData();
+        List<Board> boardData = BoardFixture.createSeveralBoard();
         boardRepository.saveAll(boardData);
     }
 
     @Test
+    @DisplayName("findById 테스트")
     void getBoardTest() {
         Board board = boardRepository.findById(1L).get();
 
@@ -49,11 +46,23 @@ public class BoardRepositoryTest {
     }
 
     @Test
+    @DisplayName("findAll 테스트")
     void getListOfBoardTest() {
         List<Board> boards = boardRepository.findAll();
 
         Assertions.assertAll(
                 () -> assertEquals(boards.size(), 3)
+        );
+    }
+
+    @Test
+    @DisplayName("deleteAll 테스트")
+    void deleteBoardTest() {
+        boardRepository.deleteAll();
+        List<Board> boards = boardRepository.findAll();
+
+        Assertions.assertAll(
+                () -> assertEquals(boards.size(), 0)
         );
     }
 }
