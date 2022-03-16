@@ -61,6 +61,6 @@ public class BoardController extends RestSupport {
     @GetMapping("/lists")
     public ResponseEntity<?> selectBoardList() {
         log.info("Select Board List Start");
-        return response(boardService.selectBoardlist());
+        return response(boardService.selectBoardList());
     }
 }

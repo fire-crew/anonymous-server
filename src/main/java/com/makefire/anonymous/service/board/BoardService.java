@@ -62,7 +62,7 @@ public class BoardService {
         return true;
     }
 
-    public List<BoardResponse> selectBoardlist() {
+    public List<BoardResponse> selectBoardList() {
         // TODO 페이징 처리 필요
         List<Board> boardList = boardRepository.findAll();
         return BoardResponse.fromList(boardList);
