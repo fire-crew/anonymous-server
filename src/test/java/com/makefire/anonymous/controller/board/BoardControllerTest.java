@@ -16,16 +16,16 @@ import org.springframework.http.MediaType;
 import java.util.ArrayList;
 import java.util.List;
 import static org.hamcrest.Matchers.containsString;
-import static org.mockito.ArgumentMatchers.refEq;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class BoardControllerTest extends SpringMockMvcTestSupport {
+public class    BoardControllerTest extends SpringMockMvcTestSupport {
 
     @MockBean
     BoardService boardService;
@@ -55,5 +55,17 @@ public class BoardControllerTest extends SpringMockMvcTestSupport {
                 .andDo(print());
 
         verify(boardService).createBoard(refEq(boardRequest));
+    }
+
+    @Test
+    @DisplayName("게시판 삭제 ")
+    void deleteBoardTest()throws Exception{
+        given(boardService.deleteBoard(1L)).willReturn(true);
+
+        mockMvc.perform(delete("/board/"+1L))
+                .andExpect(status().isOk())
+                .andDo(print());
+
+        verify(boardService,times(1)).deleteBoard(eq(1L));
     }
 }
