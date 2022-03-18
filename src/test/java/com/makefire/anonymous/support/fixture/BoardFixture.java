@@ -54,6 +54,7 @@ public class BoardFixture {
 
     public static BoardRequest createOneBoardRequest() {
         return BoardRequest.builder()
+                .id(1L)
                 .title("Test title One")
                 .contents("Test contents One")
                 .author("Test author One")
