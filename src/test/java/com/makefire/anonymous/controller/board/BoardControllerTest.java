@@ -18,8 +18,7 @@ import java.util.List;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -47,6 +46,8 @@ public class    BoardControllerTest extends SpringMockMvcTestSupport {
     @DisplayName("게시판 생성 테스트")
     void createBoardTest() throws Exception{
         BoardRequest boardRequest= BoardFixture.createBoardRequest();
+
+        when(boardService.createBoard(any())).thenReturn(BoardResponse.from(BoardRequest.toEntity(boardRequest)));
 
         mockMvc.perform(post("/board")
                 .contentType(MediaType.APPLICATION_JSON)
