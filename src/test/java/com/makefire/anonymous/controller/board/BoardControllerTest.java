@@ -30,6 +30,21 @@ public class    BoardControllerTest extends SpringMockMvcTestSupport {
     BoardService boardService;
 
     @Test
+    @DisplayName("게시판 생성 테스트")
+    void createBoardTest() throws Exception{
+        BoardRequest boardRequest= BoardFixture.createBoardRequest();
+        when(boardService.createBoard(any())).thenReturn(BoardResponse.from(BoardRequest.toEntity(boardRequest)));
+
+        mockMvc.perform(post("/board")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(boardRequest)))
+                .andExpect(status().isOk())
+                .andDo(print());
+
+        verify(boardService).createBoard(refEq(boardRequest));
+    }
+
+    @Test
     @DisplayName("게시판 전체조회 테스트")
     void selectBoardsTest() throws Exception {
         List<BoardResponse> list = new ArrayList<>();
@@ -43,20 +58,23 @@ public class    BoardControllerTest extends SpringMockMvcTestSupport {
     }
 
     @Test
-    @DisplayName("게시판 생성 테스트")
-    void createBoardTest() throws Exception{
-        BoardRequest boardRequest= BoardFixture.createBoardRequest();
+    @DisplayName("게시판 단건 조회 테스트")
+    void selectBoardTest() throws Exception{
+        BoardResponse boardResponse=BoardFixture.createBoardResponse();
+        given(boardService.selectBoard(boardResponse.getId())).willReturn(boardResponse);
 
-        when(boardService.createBoard(any())).thenReturn(BoardResponse.from(BoardRequest.toEntity(boardRequest)));
-
-        mockMvc.perform(post("/board")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(new ObjectMapper().writeValueAsString(boardRequest)))
+        mockMvc.perform(get("/board/"+boardResponse.getId()))
                 .andExpect(status().isOk())
                 .andDo(print());
-
-        verify(boardService).createBoard(refEq(boardRequest));
     }
+
+    @Test
+    @DisplayName("게시판 업데이트 테스트")
+    void updateBoardTest() {
+
+    }
+
+
 
     @Test
     @DisplayName("게시판 삭제 ")
