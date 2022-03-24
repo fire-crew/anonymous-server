@@ -39,6 +39,10 @@ public class    BoardControllerTest extends SpringMockMvcTestSupport {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(boardRequest)))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("data.title").value(boardRequest.getTitle()))
+                .andExpect(jsonPath("data.content").value(boardRequest.getContent()))
+                .andExpect(jsonPath("data.author").value(boardRequest.getAuthor()))
+                .andExpect(jsonPath("data.authorId").value(boardRequest.getAuthorId()))
                 .andDo(print());
 
         verify(boardService).createBoard(refEq(boardRequest));
@@ -61,10 +65,14 @@ public class    BoardControllerTest extends SpringMockMvcTestSupport {
     @DisplayName("게시판 단건 조회 테스트")
     void selectBoardTest() throws Exception{
         BoardResponse boardResponse=BoardFixture.createBoardResponse();
-        given(boardService.selectBoard(boardResponse.getId())).willReturn(boardResponse);
+        when(boardService.selectBoard(boardResponse.getId())).thenReturn(boardResponse);
 
         mockMvc.perform(get("/board/"+boardResponse.getId()))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("data.title").value(boardResponse.getTitle()))
+                .andExpect(jsonPath("data.content").value(boardResponse.getContent()))
+                .andExpect(jsonPath("data.author").value(boardResponse.getAuthor()))
+                .andExpect(jsonPath("data.authorId").value(boardResponse.getAuthorId()))
                 .andDo(print());
     }
 
