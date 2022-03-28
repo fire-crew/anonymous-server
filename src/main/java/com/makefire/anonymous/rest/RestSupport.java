@@ -1,8 +1,9 @@
 package com.makefire.anonymous.rest;
 
+import com.makefire.anonymous.rest.dto.response.Response;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import com.makefire.anonymous.rest.dto.response.Response;
+
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -20,6 +21,13 @@ public abstract class RestSupport{
                 .ok()
                 .contentType(MEDIA_TYPE_APPLICATION_JSON_UTF8)
                 .body(new Response(200, data, "Ok"));
+    }
+
+    protected<T> ResponseEntity<Response> response_201(T data){
+        return ResponseEntity
+                .ok()
+                .contentType(MEDIA_TYPE_APPLICATION_JSON_UTF8)
+                .body(new Response(201, data, "CREATED"));
     }
 
     protected<T> ResponseEntity<Response> response_404(T data){

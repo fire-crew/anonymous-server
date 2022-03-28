@@ -1,9 +1,12 @@
-package com.makefire.anonymous.rest.core;
-
-import javax.servlet.http.HttpServletResponse;
+package com.makefire.anonymous.config.web.advice;
 
 import com.makefire.anonymous.exception.BadRequestException;
+import com.makefire.anonymous.exception.DuplicateException;
 import com.makefire.anonymous.exception.ModelNotFoundException;
+import com.makefire.anonymous.rest.RestSupport;
+import com.makefire.anonymous.rest.core.ApiError;
+import com.makefire.anonymous.rest.core.ApiResult;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.AuthenticationException;
@@ -11,14 +14,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import lombok.extern.slf4j.Slf4j;
+import javax.servlet.http.HttpServletResponse;
 
 @RestControllerAdvice
 @Slf4j
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler extends RestSupport {
 
-    @ExceptionHandler(value = {BadRequestException.class, IllegalArgumentException.class,
-            IndexOutOfBoundsException.class})
+    @ExceptionHandler(value = {BadRequestException.class, IllegalArgumentException.class, IndexOutOfBoundsException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiResult<?> handleBadRequest(Exception e) {
         log.info("BadRequest Exception, message: {{}}", e.getMessage());
@@ -52,5 +54,12 @@ public class GlobalExceptionHandler {
         log.info("Exception, message: {{}}", e.getMessage());
         e.printStackTrace();
         return ApiResult.ERROR(e, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(value = {DuplicateException.class})
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ApiResult<ApiError> handleConflict(Exception e) {
+        log.info("Conflict Exception, message: {{}}", e.getMessage());
+        return ApiResult.ERROR(e, HttpStatus.CONFLICT);
     }
 }
