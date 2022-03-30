@@ -1,8 +1,8 @@
 package com.makefire.anonymous.controller.board;
 
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.makefire.anonymous.domain.board.entity.Board;
 import com.makefire.anonymous.rest.dto.request.board.BoardRequest;
 import com.makefire.anonymous.rest.dto.response.board.BoardResponse;
 import com.makefire.anonymous.service.board.BoardService;
@@ -13,11 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 
-import java.util.ArrayList;
 import java.util.List;
-import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -51,13 +48,12 @@ public class    BoardControllerTest extends SpringMockMvcTestSupport {
     @Test
     @DisplayName("게시판 전체조회 테스트")
     void selectBoardsTest() throws Exception {
-        List<BoardResponse> list = new ArrayList<>();
-        list.add(BoardResponse.builder().title("testTitle").build());
-        given(boardService.selectBoards()).willReturn(list);
+        List<Board> list=BoardFixture.createBoards();
+        when(boardService.selectBoards()).thenReturn(BoardResponse.fromList(list));
 
         mockMvc.perform(get("/board/list"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.data[0].title", containsString("testTitle")))
+                .andExpect(jsonPath("$.data[0].title").value(list.get(0).getTitle()))
                 .andDo(print());
     }
 
@@ -87,7 +83,7 @@ public class    BoardControllerTest extends SpringMockMvcTestSupport {
     @Test
     @DisplayName("게시판 삭제 ")
     void deleteBoardTest()throws Exception{
-        given(boardService.deleteBoard(1L)).willReturn(true);
+       when(boardService.deleteBoard(any())).thenReturn(true);
 
         mockMvc.perform(delete("/board/"+1L))
                 .andExpect(status().isOk())

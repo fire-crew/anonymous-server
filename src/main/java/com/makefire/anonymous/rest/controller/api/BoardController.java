@@ -27,7 +27,7 @@ public class BoardController extends RestSupport {
         return response(boardService.createBoard(boardRequest));
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Response> selectBoard(@PathVariable("id") Long id) {
 
         return response(boardService.selectBoard(id));
@@ -44,7 +44,7 @@ public class BoardController extends RestSupport {
         return response(boardService.updateBoard(boardRequest));
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Response> deleteBoard(@PathVariable("id") Long id) {
         return response(boardService.deleteBoard(id));
     }
