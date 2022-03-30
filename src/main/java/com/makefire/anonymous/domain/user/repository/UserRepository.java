@@ -1,8 +1,8 @@
 package com.makefire.anonymous.domain.user.repository;
 
-import com.makefire.anonymous.domain.user.entity.Authority;
-import com.makefire.anonymous.service.user.UserService;
+import com.makefire.anonymous.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  *packageName : com.makefire.anonymous
@@ -13,8 +13,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * =================================
  * DATE     AUTHOR   NOTE
  * 22-01-15 최푸름
+ * 22-02-14 김민철
  * ---------------------------------
  */
-public interface UserRepository extends JpaRepository<Authority, Long> {
+@Repository
+public interface UserRepository extends JpaRepository<User,Long> {
 
 }
