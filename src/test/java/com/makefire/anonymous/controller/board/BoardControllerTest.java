@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class    BoardControllerTest extends SpringMockMvcTestSupport {
 
     @MockBean
-    BoardService boardService;
+    private BoardService boardService;
 
     @Test
     @DisplayName("게시판 생성 테스트")

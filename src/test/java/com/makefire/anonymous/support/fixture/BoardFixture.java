@@ -63,4 +63,14 @@ public class BoardFixture {
                 .authorId(12L)
                 .build();
     }
+
+    public static BoardRequest createUpdateBoard(){
+        return  BoardRequest.builder()
+                .id(1L)
+                .title("updateTitle")
+                .content("updateContent")
+                .author("updateAuthor")
+                .authorId(12L)
+                .build();
+    }
 }

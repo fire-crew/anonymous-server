@@ -33,10 +33,10 @@ public class BoardService {
     }
 
     @Transactional(rollbackFor = IllegalArgumentException.class)
-    public Boolean updateBoard(BoardRequest boardRequest) {
+    public BoardResponse updateBoard(BoardRequest boardRequest) {
         Board board = boardRepository.findById(boardRequest.getId()).orElseThrow(() -> new IllegalArgumentException());
         board.update(boardRequest);
-        return true;
+        return BoardResponse.from(board);
     }
 
     public Boolean deleteBoard(Long id) {
