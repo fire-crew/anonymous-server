@@ -1,9 +1,7 @@
 package com.makefire.anonymous.domain.user.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.makefire.anonymous.domain.common.BaseEntity;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -18,16 +16,16 @@ import javax.persistence.*;
  * 22-01-15 최푸름
  * ---------------------------------
  */
-@Table(name = "user")
-@Entity
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Table(name="user")
 @Getter
-public class User {
+@Entity
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class User extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    private String name;
+
+    @Builder
+    public User (String name) {
+        this.name = name;
+    }
 }

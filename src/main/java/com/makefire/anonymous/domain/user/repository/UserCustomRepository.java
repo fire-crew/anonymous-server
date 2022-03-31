@@ -16,5 +16,8 @@ import java.util.List;
  * ---------------------------------
  */
 public interface UserCustomRepository {
+
+    User getUser(String name);
+
     List<User> getUserList();
 }
