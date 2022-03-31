@@ -42,6 +42,14 @@ public class UserRepositoryImpl implements UserCustomRepository {
             .execute();
         return 1L;
     }
+
+    @Override
+    public Long deleteUser(String name) {
+        queryFactory.delete(user)
+                .where(user.name.eq(name))
+                .execute();
+        return 1L;
+    }
 }
 
 

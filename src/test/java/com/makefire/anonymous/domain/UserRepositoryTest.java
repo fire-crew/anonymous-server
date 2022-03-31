@@ -58,4 +58,14 @@ public class UserRepositoryTest extends RepositoryTestSupport {
                 () -> assertEquals(number, 1L)
         );
     }
+
+    @Test
+    @DisplayName("deleteUser 테스트")
+    void deleteUserTest() {
+        long number = userRepository.deleteUser("test name");
+
+        Assertions.assertAll(
+                () -> assertEquals(number, 1L)
+        );
+    }
 }

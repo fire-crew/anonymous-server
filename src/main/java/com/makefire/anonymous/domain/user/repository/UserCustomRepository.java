@@ -22,4 +22,6 @@ public interface UserCustomRepository {
     List<User> getUserList();
 
     Long updateUser(String oldName, String newName);
+
+    Long deleteUser(String name);
 }
