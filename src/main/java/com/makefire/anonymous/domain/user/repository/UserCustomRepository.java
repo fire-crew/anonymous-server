@@ -20,4 +20,6 @@ public interface UserCustomRepository {
     User getUser(String name);
 
     List<User> getUserList();
+
+    Long updateUser(String oldName, String newName);
 }

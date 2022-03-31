@@ -33,6 +33,15 @@ public class UserRepositoryImpl implements UserCustomRepository {
                 .selectFrom(user)
                 .fetch();
     }
+
+    @Override
+    public Long updateUser(String oldName, String newName) {
+        queryFactory.update(user)
+            .where(user.name.eq(oldName))
+            .set(user.name, newName)
+            .execute();
+        return 1L;
+    }
 }
 
 

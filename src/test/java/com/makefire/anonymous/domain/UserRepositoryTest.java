@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class UserRepositoryTest extends RepositoryTestSupport {
 
@@ -29,11 +30,6 @@ public class UserRepositoryTest extends RepositoryTestSupport {
     @Test
     @DisplayName("getUser 테스트")
     void getUser() {
-//        User user = User.builder()
-//                .name("test name")
-//                .build();
-//        userRepository.save(user);
-
         User result = userRepository.getUser("test name");
 
         Assertions.assertAll(
@@ -44,11 +40,22 @@ public class UserRepositoryTest extends RepositoryTestSupport {
     @Test
     @DisplayName("getUserList 테스트")
     void getUserListTest() {
-
         List<User> userList = userRepository.getUserList();
 
         Assertions.assertAll(
                 () -> assertEquals(userList.size(), 1)
+        );
+    }
+
+    @Test
+    @DisplayName("updateUser 테스트")
+    void updateUserTest() {
+        String newName = "new test name";
+        User user = userRepository.getUser("test name");
+        long number = userRepository.updateUser(user.getName(), newName);
+
+        Assertions.assertAll(
+                () -> assertEquals(number, 1L)
         );
     }
 }
