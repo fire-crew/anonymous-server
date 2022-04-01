@@ -1,8 +1,8 @@
-package com.makefire.anonymous.domain.board.entity;
+package com.makefire.anonymous.domain.post.entity;
 
 
 import com.makefire.anonymous.domain.common.BasicEntity;
-import com.makefire.anonymous.rest.dto.request.board.BoardRequest;
+import com.makefire.anonymous.rest.dto.request.post.PostRequest;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Board extends BasicEntity {
+public class Post extends BasicEntity {
 
 
     @NotNull(message = "Title must not be null")
@@ -30,19 +30,19 @@ public class Board extends BasicEntity {
 
 
     @Builder
-    public Board(String title, String content, String author, Long authorId) {
+    public Post(String title, String content, String author, Long authorId) {
         this.title = title;
         this.content = content;
         this.author = author;
         this.authorId = authorId;
     }
 
-    public void update(BoardRequest boardRequest){
-        this.id = boardRequest.getId();
-        this.title = boardRequest.getTitle();
-        this.content = boardRequest.getContent();
-        this.author = boardRequest.getAuthor();
-        this.authorId = boardRequest.getAuthorId();
+    public void update(PostRequest postRequest){
+        this.id = postRequest.getId();
+        this.title = postRequest.getTitle();
+        this.content = postRequest.getContent();
+        this.author = postRequest.getAuthor();
+        this.authorId = postRequest.getAuthorId();
     }
 
 }
