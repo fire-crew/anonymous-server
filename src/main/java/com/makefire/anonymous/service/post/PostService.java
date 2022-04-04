@@ -16,30 +16,30 @@ import java.util.List;
 public class PostService {
     private final PostRepository postRepository;
 
-    public PostResponse selectBoard(Long id) {
+    public PostResponse selectPost(Long id) {
         Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException());
         return PostResponse.from(post);
     }
 
-    public List<PostResponse> selectBoards() {
+    public List<PostResponse> selectPosts() {
         List<Post> postList = postRepository.findAll();
         return PostResponse.fromList(postList);
     }
 
     @Transactional
-    public PostResponse createBoard(PostRequest postRequest) {
+    public PostResponse createPost(PostRequest postRequest) {
         Post post = PostRequest.toEntity(postRequest);
         return PostResponse.from(postRepository.save(post));
     }
 
     @Transactional(rollbackFor = IllegalArgumentException.class)
-    public PostResponse updateBoard(PostRequest postRequest) {
+    public PostResponse updatePost(PostRequest postRequest) {
         Post post = postRepository.findById(postRequest.getId()).orElseThrow(() -> new IllegalArgumentException());
         post.update(postRequest);
         return PostResponse.from(post);
     }
 
-    public Boolean deleteBoard(Long id) {
+    public Boolean deletePost(Long id) {
         Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException());
         postRepository.delete(post);
         return true;

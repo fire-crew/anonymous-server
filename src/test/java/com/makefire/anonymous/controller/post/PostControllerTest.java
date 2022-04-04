@@ -7,7 +7,7 @@ import com.makefire.anonymous.rest.dto.request.post.PostRequest;
 import com.makefire.anonymous.rest.dto.response.post.PostResponse;
 import com.makefire.anonymous.service.post.PostService;
 import com.makefire.anonymous.support.SpringMockMvcTestSupport;
-import com.makefire.anonymous.support.fixture.BoardFixture;
+import com.makefire.anonymous.support.fixture.PostFixture;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -28,11 +28,11 @@ public class PostControllerTest extends SpringMockMvcTestSupport {
 
     @Test
     @DisplayName("게시판 생성 테스트")
-    void createBoardTest() throws Exception{
-        PostRequest postRequest = BoardFixture.createBoardRequest();
-        when(postService.createBoard(any())).thenReturn(PostResponse.from(PostRequest.toEntity(postRequest)));
+    void createPostTest() throws Exception{
+        PostRequest postRequest = PostFixture.createPostRequest();
+        when(postService.createPost(any())).thenReturn(PostResponse.from(PostRequest.toEntity(postRequest)));
 
-        mockMvc.perform(post("/board")
+        mockMvc.perform(post("/post")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(postRequest)))
                 .andExpect(status().isOk())
@@ -42,16 +42,16 @@ public class PostControllerTest extends SpringMockMvcTestSupport {
                 .andExpect(jsonPath("data.authorId").value(postRequest.getAuthorId()))
                 .andDo(print());
 
-        verify(postService).createBoard(refEq(postRequest));
+        verify(postService).createPost(refEq(postRequest));
     }
 
     @Test
     @DisplayName("게시판 전체조회 테스트")
-    void selectBoardsTest() throws Exception {
-        List<Post> list=BoardFixture.createBoards();
-        when(postService.selectBoards()).thenReturn(PostResponse.fromList(list));
+    void selectPostsTest() throws Exception {
+        List<Post> list= PostFixture.createPosts();
+        when(postService.selectPosts()).thenReturn(PostResponse.fromList(list));
 
-        mockMvc.perform(get("/board/list"))
+        mockMvc.perform(get("/post/list"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data[0].title").value(list.get(0).getTitle()))
                 .andDo(print());
@@ -59,11 +59,11 @@ public class PostControllerTest extends SpringMockMvcTestSupport {
 
     @Test
     @DisplayName("게시판 단건 조회 테스트")
-    void selectBoardTest() throws Exception{
-        PostResponse postResponse =BoardFixture.createBoardResponse();
-        when(postService.selectBoard(postResponse.getId())).thenReturn(postResponse);
+    void selectPostTest() throws Exception{
+        PostResponse postResponse = PostFixture.createPostResponse();
+        when(postService.selectPost(postResponse.getId())).thenReturn(postResponse);
 
-        mockMvc.perform(get("/board/"+ postResponse.getId()))
+        mockMvc.perform(get("/post/"+ postResponse.getId()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("data.title").value(postResponse.getTitle()))
                 .andExpect(jsonPath("data.content").value(postResponse.getContent()))
@@ -74,7 +74,19 @@ public class PostControllerTest extends SpringMockMvcTestSupport {
 
     @Test
     @DisplayName("게시판 업데이트 테스트")
-    void updateBoardTest() {
+    void updatePostTest() throws Exception {
+        PostRequest postUpdateRequest=PostFixture.updatePostRequest();
+        PostResponse updatePostResponse=PostFixture.updatePostResponse();
+        when(postService.updatePost(any())).thenReturn(updatePostResponse);
+
+        mockMvc.perform(put("/post")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsString(postUpdateRequest)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("data.title").value(postUpdateRequest.getTitle()))
+                .andExpect(jsonPath("data.author").value(postUpdateRequest.getAuthor()))
+                .andExpect(jsonPath("data.content").value(postUpdateRequest.getContent()))
+                .andDo(print());
 
     }
 
@@ -82,13 +94,13 @@ public class PostControllerTest extends SpringMockMvcTestSupport {
 
     @Test
     @DisplayName("게시판 삭제 ")
-    void deleteBoardTest()throws Exception{
-       when(postService.deleteBoard(any())).thenReturn(true);
+    void deletePostTest()throws Exception{
+       when(postService.deletePost(any())).thenReturn(true);
 
-        mockMvc.perform(delete("/board/"+1L))
+        mockMvc.perform(delete("/post/"+1L))
                 .andExpect(status().isOk())
                 .andDo(print());
 
-        verify(postService,times(1)).deleteBoard(eq(1L));
+        verify(postService,times(1)).deletePost(eq(1L));
     }
 }

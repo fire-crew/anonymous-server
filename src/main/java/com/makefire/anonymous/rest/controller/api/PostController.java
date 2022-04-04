@@ -21,32 +21,30 @@ public class PostController extends RestSupport {
 
 
     @PostMapping
-    public ResponseEntity<Response> createBoard(
+    public ResponseEntity<Response> createPost(
             @Valid @RequestBody PostRequest postRequest) {
-        log.info("createBoard", postRequest.toString());
-        return response(postService.createBoard(postRequest));
+        log.info("createPost", postRequest.toString());
+        return response(postService.createPost(postRequest));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Response> selectBoard(@PathVariable("id") Long id) {
-
-        return response(postService.selectBoard(id));
-
+    public ResponseEntity<Response> selectPost(@PathVariable("id") Long id) {
+        return response(postService.selectPost(id));
     }
 
     @GetMapping("/list")
-    public ResponseEntity<Response> selectBoards() {
-        return response(postService.selectBoards());
+    public ResponseEntity<Response> selectPosts() {
+        return response(postService.selectPosts());
     }
 
     @PutMapping
-    public ResponseEntity<Response> updateBoard(@Valid @RequestBody PostRequest postRequest) {
-        return response(postService.updateBoard(postRequest));
+    public ResponseEntity<Response> updatePost(@Valid @RequestBody PostRequest postRequest) {
+        return response(postService.updatePost(postRequest));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Response> deleteBoard(@PathVariable("id") Long id) {
-        return response(postService.deleteBoard(id));
+    public ResponseEntity<Response> deletePost(@PathVariable("id") Long id) {
+        return response(postService.deletePost(id));
     }
 
 }

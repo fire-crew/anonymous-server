@@ -7,9 +7,9 @@ import com.makefire.anonymous.rest.dto.response.post.PostResponse;
 import java.util.Arrays;
 import java.util.List;
 
-public class BoardFixture {
+public class PostFixture {
 
-    public static PostRequest createBoardRequest(){
+    public static PostRequest createPostRequest(){
         return PostRequest.builder()
                 .id(1L)
                 .title("testTitle")
@@ -19,7 +19,7 @@ public class BoardFixture {
                 .build();
     }
 
-    public static PostResponse createBoardResponse(){
+    public static PostResponse createPostResponse(){
         return PostResponse.builder()
                 .id(1L)
                 .title("testTitle")
@@ -29,8 +29,28 @@ public class BoardFixture {
                 .build();
     }
 
+    public static PostResponse updatePostResponse(){
+        return PostResponse.builder()
+                .id(1L)
+                .title("updateTitle")
+                .content("updateContent")
+                .author("updateAuthor")
+                .authorId(12L)
+                .build();
+    }
 
-    public static List<Post> createBoards(){
+    public static PostRequest updatePostRequest(){
+        return PostRequest.builder()
+                .id(1L)
+                .title("updateTitle")
+                .content("updateContent")
+                .author("updateAuthor")
+                .authorId(12L)
+                .build();
+    }
+
+
+    public static List<Post> createPosts(){
         Post post1 = Post.builder()
                 .title("testTitle")
                 .content("testContent")
@@ -55,7 +75,7 @@ public class BoardFixture {
         return Arrays.asList(post1, post2, post3);
     }
 
-    public static Post createBoard(){
+    public static Post createPost(){
       return  Post.builder()
                 .title("testTitle")
                 .content("testContent")
@@ -64,7 +84,7 @@ public class BoardFixture {
                 .build();
     }
 
-    public static PostRequest createUpdateBoard(){
+    public static PostRequest createUpdatePost(){
         return  PostRequest.builder()
                 .id(1L)
                 .title("updateTitle")

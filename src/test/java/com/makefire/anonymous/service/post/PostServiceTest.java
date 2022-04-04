@@ -5,7 +5,7 @@ import com.makefire.anonymous.domain.post.repository.PostRepository;
 import com.makefire.anonymous.rest.dto.request.post.PostRequest;
 import com.makefire.anonymous.rest.dto.response.post.PostResponse;
 import com.makefire.anonymous.support.SpringTestSupport;
-import com.makefire.anonymous.support.fixture.BoardFixture;
+import com.makefire.anonymous.support.fixture.PostFixture;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -30,38 +30,38 @@ public class PostServiceTest extends SpringTestSupport {
 
     @Nested
     class CreateCommonRequest{
-        PostRequest postRequest =BoardFixture.createBoardRequest();
+        PostRequest postRequest = PostFixture.createPostRequest();
 
         @Test
-        @DisplayName("Board를 생성하여 저장한다.")
-        void createBoardTest() {
+        @DisplayName("Post를 생성하여 저장한다.")
+        void createPostTest() {
             when(postRepository.save(any())).thenReturn(PostRequest.toEntity(postRequest));
-            PostResponse postResponse = postService.createBoard(postRequest);
+            PostResponse postResponse = postService.createPost(postRequest);
             assertEquals(postRequest.getTitle(), postResponse.getTitle());
         }
 
         @Test
-        @DisplayName("Board를 생성하여 저장한다.")
-        void updateBoardTest() {
-            PostRequest postRequest1 =BoardFixture.createUpdateBoard();
+        @DisplayName("Post를 생성하여 저장한다.")
+        void updatePostTest() {
+            PostRequest postRequest1 = PostFixture.createUpdatePost();
             when(postRepository.findById(any())).thenReturn(Optional.of(PostRequest.toEntity(postRequest)));
-            PostResponse postResponse = postService.updateBoard(postRequest1);
+            PostResponse postResponse = postService.updatePost(postRequest1);
             assertEquals(postRequest1.getTitle(), postResponse.getTitle());
         }
 
         @Test
-        @DisplayName("Board를 단건 조회한다")
+        @DisplayName("Post를 단건 조회한다")
         void getPostTest(){
             when(postRepository.findById(any())).thenReturn(Optional.ofNullable(PostRequest.toEntity(postRequest)));
-            PostResponse postResponse = postService.selectBoard(1L);
+            PostResponse postResponse = postService.selectPost(1L);
             assertEquals(postRequest.getTitle(), postResponse.getTitle());
         }
 
         @Test
         @DisplayName("id 를 입력받아 데이터를 삭제한다.")
-        void deleteBoardTest() {
+        void deletePostTest() {
             when(postRepository.findById(any())).thenReturn(Optional.of(PostRequest.toEntity(postRequest)));
-            Boolean result = postService.deleteBoard(1L);
+            Boolean result = postService.deletePost(1L);
             assertEquals(true, result);
         }
 
@@ -69,10 +69,10 @@ public class PostServiceTest extends SpringTestSupport {
 
     @Test
     @DisplayName("모든 데이터를 찾아 반환한다.")
-    void selectBoardListTest() {
-        List<Post> postList = BoardFixture.createBoards();
+    void selectPostListTest() {
+        List<Post> postList = PostFixture.createPosts();
         when(postRepository.findAll()).thenReturn(postList);
-        List<PostResponse> postResponseList = postService.selectBoards();
+        List<PostResponse> postResponseList = postService.selectPosts();
         assertEquals(postList.size(), postResponseList.size());
     }
 

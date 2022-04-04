@@ -2,7 +2,7 @@ package com.makefire.anonymous.domain.post.repository;
 
 import com.makefire.anonymous.domain.post.entity.Post;
 import com.makefire.anonymous.support.SpringTestSupport;
-import com.makefire.anonymous.support.fixture.BoardFixture;
+import com.makefire.anonymous.support.fixture.PostFixture;
 
 import org.hamcrest.collection.IsEmptyCollection;
 import org.junit.jupiter.api.Assertions;
@@ -25,13 +25,13 @@ public class PostRepositoryTest extends SpringTestSupport {
 
     @BeforeEach
     void setUp() {
-        List<Post> postData = BoardFixture.createBoards();
+        List<Post> postData = PostFixture.createPosts();
         postRepository.saveAll(postData);
     }
 
     @Test
     @DisplayName("findById 테스트")
-    void getBoardTest() {
+    void getPostTest() {
         Post post = postRepository.findById(1L).get();
 
         Assertions.assertAll(
@@ -41,7 +41,7 @@ public class PostRepositoryTest extends SpringTestSupport {
 
     @Test
     @DisplayName("findAll 테스트")
-    void getListOfBoardTest() {
+    void getListOfPostTest() {
         List<Post> posts = postRepository.findAll();
 
         Assertions.assertAll(
@@ -51,7 +51,7 @@ public class PostRepositoryTest extends SpringTestSupport {
 
     @Test
     @DisplayName("deleteAll 테스트")
-    void deleteBoardTest() {
+    void deletePostTest() {
         postRepository.deleteAll();
         List<Post> posts = postRepository.findAll();
     /**
