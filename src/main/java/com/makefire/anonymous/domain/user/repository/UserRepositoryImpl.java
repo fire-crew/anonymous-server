@@ -2,7 +2,6 @@ package com.makefire.anonymous.domain.user.repository;
 
 import com.makefire.anonymous.domain.user.entity.QUser;
 import com.makefire.anonymous.domain.user.entity.User;
-import com.querydsl.jpa.impl.JPAInsertClause;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 
@@ -17,36 +16,45 @@ public class UserRepositoryImpl implements UserCustomRepository {
         this.queryFactory = queryFactory;
     }
 
-    QUser user = QUser.user;
+    QUser qUser = QUser.user;
 
     @Override
     public User getUser(String name) {
         return queryFactory
-                .selectFrom(user)
-                .where(user.name.eq(name))
+                .selectFrom(qUser)
+                .where(qUser.name.eq(name))
                 .fetchOne();
     }
 
     @Override
     public List<User> getUserList() {
         return queryFactory
-                .selectFrom(user)
+                .selectFrom(qUser)
                 .fetch();
     }
 
     @Override
+    public Long insertUser(User user) {
+        queryFactory.insert(qUser)
+                .columns(qUser.name)
+                .values(user.getName());
+        return 1L;
+    }
+
+
+    @Override
     public Long updateUser(String oldName, String newName) {
-        queryFactory.update(user)
-            .where(user.name.eq(oldName))
-            .set(user.name, newName)
+        queryFactory.update(qUser)
+            .where(qUser.name.eq(oldName))
+            .set(qUser.name, newName)
             .execute();
         return 1L;
     }
 
     @Override
     public Long deleteUser(String name) {
-        queryFactory.delete(user)
-                .where(user.name.eq(name))
+        queryFactory.delete(qUser)
+                .where(qUser.name.eq(name))
                 .execute();
         return 1L;
     }

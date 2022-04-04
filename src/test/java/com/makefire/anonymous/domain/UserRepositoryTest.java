@@ -48,6 +48,20 @@ public class UserRepositoryTest extends RepositoryTestSupport {
     }
 
     @Test
+    @DisplayName("insertUser 테스트")
+    void insertUserTest() {
+        User user = User.builder()
+                .name("test name")
+                .build();
+
+        Long number = userRepository.insertUser(user);
+
+        Assertions.assertAll(
+                () -> assertEquals(number, 1L)
+        );
+    }
+
+    @Test
     @DisplayName("updateUser 테스트")
     void updateUserTest() {
         String newName = "new test name";
