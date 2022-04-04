@@ -5,7 +5,7 @@ import com.makefire.anonymous.domain.user.entity.User;
 import java.util.List;
 
 /**
- *packageName : com.makefire.anonymous
+ * packageName : com.makefire.anonymous
  * fileName : UserCustomRepository
  * author : 최푸름
  * date : 22-01-14
@@ -17,11 +17,11 @@ import java.util.List;
  */
 public interface UserCustomRepository {
 
+    Long insertUser(User user);
+
     User getUser(String name);
 
     List<User> getUserList();
-
-    Long insertUser(User user);
 
     Long updateUser(String oldName, String newName);
 

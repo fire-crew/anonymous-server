@@ -19,6 +19,14 @@ public class UserRepositoryImpl implements UserCustomRepository {
     QUser qUser = QUser.user;
 
     @Override
+    public Long insertUser(User user) {
+        queryFactory.insert(qUser)
+                .columns(qUser.name)
+                .values(user.getName());
+        return 1L;
+    }
+
+    @Override
     public User getUser(String name) {
         return queryFactory
                 .selectFrom(qUser)
@@ -34,20 +42,11 @@ public class UserRepositoryImpl implements UserCustomRepository {
     }
 
     @Override
-    public Long insertUser(User user) {
-        queryFactory.insert(qUser)
-                .columns(qUser.name)
-                .values(user.getName());
-        return 1L;
-    }
-
-
-    @Override
     public Long updateUser(String oldName, String newName) {
         queryFactory.update(qUser)
-            .where(qUser.name.eq(oldName))
-            .set(qUser.name, newName)
-            .execute();
+                .where(qUser.name.eq(oldName))
+                .set(qUser.name, newName)
+                .execute();
         return 1L;
     }
 
