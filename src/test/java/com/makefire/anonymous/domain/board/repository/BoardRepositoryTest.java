@@ -36,16 +36,6 @@ public class BoardRepositoryTest extends RepositoryTestSupport {
     }
 
     @Test
-    @DisplayName("findById 테스트")
-    void getBoardTest() {
-        Board board = boardRepository.findById(1L).get();
-
-        Assertions.assertAll(
-                () -> assertEquals(board.getId(), 1L)
-        );
-    }
-
-    @Test
     @DisplayName("findAll 테스트")
     void getListOfBoardTest() {
         List<Board> boards = boardRepository.findAll();
