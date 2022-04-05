@@ -20,14 +20,12 @@ public class Post extends BasicEntity {
     @NotNull(message = "Title must not be null")
     private String title;
 
-
     private String content;
 
     @NotNull(message = "Author must not be null")
     private String author;
 
     private Long authorId;
-
 
     @Builder
     public Post(String title, String content, String author, Long authorId) {
