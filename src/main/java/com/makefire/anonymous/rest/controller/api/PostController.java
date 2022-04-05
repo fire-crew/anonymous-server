@@ -19,7 +19,6 @@ public class PostController extends RestSupport {
 
     private final PostService postService;
 
-
     @PostMapping
     public ResponseEntity<Response> createPost(
             @Valid @RequestBody PostRequest postRequest) {
